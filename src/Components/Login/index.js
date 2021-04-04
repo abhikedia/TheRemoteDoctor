@@ -7,7 +7,7 @@ export default function Login() {
             <Header />
             <div class="login-main">
                 <div class="login-image">
-
+                    
                 </div>
                 <div class="login-form">
                     

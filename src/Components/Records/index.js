@@ -7,7 +7,7 @@ import './index.scss';
 
 export default function Records() {
     return (
-        <div class="records-main">
+        <div>
             <Header />
             <div>
                 <div class="records-header">

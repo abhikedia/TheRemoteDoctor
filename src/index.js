@@ -10,6 +10,7 @@ ReactDOM.render(
       body {
         margin: 0px;
         padding: 0px;
+        background-color: #f5f5f5;
       }
     `}</style>
     <App />

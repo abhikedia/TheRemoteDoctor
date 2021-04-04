@@ -1,0 +1,30 @@
+.track-header {
+    display: flex;
+    margin-top:3vw;
+    margin-bottom: 2vw;
+    justify-content: center;
+}
+
+.track-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 3vw;
+}
+
+.track-img {
+    width: 30%;
+}
+
+.track-form-header {
+    background-color: black;
+    color: whitesmoke;
+    padding: 1px;
+    margin-bottom: 5vh;
+} 
+
+.track-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+}
