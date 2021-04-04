@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../Header/index';
 import Background from '../../assets/images/main_background.jpg';
-import './index.css';
+import './index.scss';
 
 export default function Homepage() {
     return (
