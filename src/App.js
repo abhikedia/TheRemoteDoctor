@@ -14,7 +14,7 @@ export default function App() {
                 <Route path="/" component={Homepage} exact />
                 <Route path="/login" component={Login} />
                 <Route path="/records" component={Records} />
-                <Route path="/dashboard" component={Dashboard} />
+                {/* <Route path="/dashboard" component={Dashboard} /> */}
                 <Route path="/appointment" component={Appointment} />
                 <Route path="/trackappointment" component={TrackAppointment} />
             </Switch>

@@ -1,9 +1,9 @@
 import React from 'react';
 import Header from '../Header/index';
 import Image from '../../assets/images/appointment.jpg';
+import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import './index.scss';
-import { Button } from '@material-ui/core';
 
 export default function TrackAppointment() {
     return (
