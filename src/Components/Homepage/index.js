@@ -1,20 +1,22 @@
 import React from 'react';
 import Header from '../Header/index';
 import Background from '../../assets/images/main_background.jpg';
+
 import './index.scss';
 
 export default function Homepage() {
+    
     return (
         <div className="homepage">
             <Header />
-            <div class="main-body">
-                <img src={Background} class="background-image" alt=''/>
+            <div className="main-body">
+                <img src={Background} alt='Health Related img.'/>
             </div>
-            <div class="footer">
-                <div class="footer-text">
+            <div className="footer">
+                <div className="footer-text">
                     Everything has moved online, why not Hospitals and Healthcare?
                     </div>
-                <div class="footer-buttons">
+                <div className="footer-buttons">
                     <span>On-Boarding Manual</span>
                     <span>Hospital Login</span>
                 </div>

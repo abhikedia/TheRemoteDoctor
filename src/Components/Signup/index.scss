@@ -1,0 +1,49 @@
+.signup-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-header {
+    margin-top:2vh;
+    margin-bottom: 5vh;
+    background-color: black;
+    color: whitesmoke;
+    align-self: center;
+    width: max-content;
+}
+
+.signup-col {
+    display: flex;
+    flex-direction: row;
+}
+
+.signup-form {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+.signup-col-1 {
+    width: 100%;
+    position: relative;
+    left: 20%;
+}
+
+.signup-avatar {
+    position: relative;
+    top: 10%;
+    height: 90% !important;
+    width: 40% !important;
+}
+
+.signup-col-2 {
+    width: 100%;
+}
+
+.signup-button {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 6vh;
+}
