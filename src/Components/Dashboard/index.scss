@@ -75,21 +75,24 @@
 }
 
 .dashboard-user-profile {
-    height: 80%;
+    height: 90%;
     border-radius: 3vh;
     margin: 5vh;
     margin-left: 6vh;
-    width: 25%;
+    width: 30%;
+    display: flex;
     background-color: #FFFFFF;
 }
 
 .dashboard-chart {
     border-radius: 3vh;
+    position: relative;
+    top: 5vh;
     background-color: #FFFFFF;
     margin-left: 6vh;
     margin-bottom: 5vh;
     margin-right: 6vh;
-    height: 45%;
+    height: 40%;
 }
 
 .dashboard-sidepane-right {
@@ -98,4 +101,39 @@
     margin-bottom: 5vh;
     border-radius: 3vh;
     width: 18%;
+}
+
+.dashboard-avatar {
+    display: flex;
+    align-self: center;
+    height: 15vh !important;
+    width: 15vh !important;
+    position: relative;
+    left: 29%;
+    bottom: 25%;
+}
+
+.dashboard-name {
+    display: flex;
+    align-self: center;
+    position: relative;
+    right: 2.2vw;
+    font-weight: bold;
+    font-size: 2.2vh;
+}
+
+.dashboard-user-profile-vertical {
+    background-color: gray !important;
+    height: 40%;
+    position: relative;
+    right: 38%;
+    top: 55%;
+}
+
+.dashboard-user-profile-horizontal {
+    height: 60%;
+    position: relative;
+    right: 45%;
+    top: 44%;
+    -webkit-transform:rotate(90deg);
 }
