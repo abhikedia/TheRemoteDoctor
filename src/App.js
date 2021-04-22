@@ -2,7 +2,7 @@ import React from 'react';
 import Homepage from './Components/Homepage/index';
 import Login from './Components/Login/index';
 import Signup from './Components/Signup/index';
-// import Dashboard from './Components/Dashboard/index';
+import Dashboard from './Components/Dashboard/index';
 import Records from './Components/Records/index';
 import Appointment from './Components/Appointment/index';
 import TrackAppointment from './Components/TrackAppointment/index';
@@ -16,7 +16,7 @@ export default function App() {
                 <Route path="/login" component={Login} />
                 <Route path="/signup" component={Signup} />
                 <Route path="/records" component={Records} />
-                {/* <Route path="/dashboard" component={Dashboard} /> */}
+                <Route path="/dashboard" component={Dashboard} />
                 <Route path="/appointment" component={Appointment} />
                 <Route path="/trackappointment" component={TrackAppointment} />
             </Switch>

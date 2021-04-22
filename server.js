@@ -46,3 +46,9 @@ app.get("/getPatientCount/", function (req, res) {
         }
     );
 });
+
+app.get("/checkPatientRegistration/", function (req,res) {
+    connection.query(
+        "Select password from Patients where email="
+    );
+});
