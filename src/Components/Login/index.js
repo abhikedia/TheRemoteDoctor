@@ -7,14 +7,48 @@ import Patient from "../../assets/images/patient.jpg";
 import TextField from "@material-ui/core/TextField";
 import Avatar from "@material-ui/core/Avatar";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import { LogIn } from "../../state/LogAction/action";
+import store from "../../store";
 import "./index.scss";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState(""); //Patient or Doctor
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    if (email === "" || password === "" || role === "") {
+      setErrorMessage("All the fields are compulsory!");
+      return;
+    }
+    let url =
+      role === "patient"
+        ? "http://localhost:4000/checkPatientRegistration/"
+        : "http://localhost:4000/checkDoctorRegistration/";
+    url += email + "/" + password;
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((response) => {
+        if (!response.length) {
+          setErrorMessage("Incorrect Email/Password or user not registered!");
+          return;
+        }
+        console.log(response[0]);
+        const data = {
+          email: response[0].email,
+          name: response[0].name,
+          gender: response[0].gender,
+          phone: response[0].phone,
+          avatar: response[0].avatar,
+          dob: "efew",
+        };
+        LogIn(data);
+        console.log(store.getState());
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div id="login-main">
@@ -81,6 +115,11 @@ export default function Login() {
               </Grid>
             </Grid>
           </div>
+          {errorMessage !== "" ? (
+            <div className="error-message">{errorMessage}</div>
+          ) : (
+            ""
+          )}
           <Button
             className="login-button"
             size="large"
@@ -95,7 +134,7 @@ export default function Login() {
         <img
           className="img"
           src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Doctor_with_Patient_Cartoon.svg"
-          alt="Doctor Image"
+          alt="Doctor"
         />
       </div>
     </div>

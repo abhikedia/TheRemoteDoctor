@@ -1,7 +1,6 @@
 #login-main {
   display: flex;
   flex-direction: row;
-  // background-color: #DADED4;
 
   #login-form {
     display: flex;
@@ -67,6 +66,10 @@
       font-size: 2rem;
       font-family: "Architects Daughter", cursive;
       color: #39603d;
+    }
+
+    .error-message {
+      color: red;
     }
 
     .role {
