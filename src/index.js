@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -10,7 +10,6 @@ ReactDOM.render(
       body {
         margin: 0px;
         padding: 0px;
-        background-color: #f5f5f5;
       }
     `}</style>
     <App />

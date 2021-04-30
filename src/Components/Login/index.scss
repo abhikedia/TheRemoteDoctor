@@ -1,0 +1,120 @@
+#login-main {
+  display: flex;
+  flex-direction: row;
+  // background-color: #DADED4;
+
+  #login-form {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    background-color: #daded4;
+
+    .header {
+      color: #3c403d;
+      font-size: 3rem;
+      font-weight: 900;
+      font-family: "Architects Daughter", cursive;
+    }
+
+    .welcome {
+      position: relative;
+      top: 3vh;
+      left: 2vw;
+      // align-self: center;
+      font-size: 2.5rem;
+      font-family: "Architects Daughter", cursive;
+      color: #39603d;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      top: 17vh;
+      align-self: center;
+      gap: 2.5vh;
+    }
+
+    .email-main {
+      position: relative;
+      // top: 10vh;
+      // left: 5vw;
+    }
+
+    .password-main {
+      position: relative;
+      // left: 5vw;
+    }
+
+    .email {
+      margin-left: 1vw;
+      width: 20vw;
+    }
+
+    .login-button {
+      background-color: #3c403d;
+      font-family: "Architects Daughter", cursive;
+      color: white;
+      align-self: center;
+      position: relative;
+      top: 2vh;
+    }
+
+    .role-header {
+      position: relative;
+      top: 8vh;
+      align-self: center;
+      font-size: 2rem;
+      font-family: "Architects Daughter", cursive;
+      color: #39603d;
+    }
+
+    .role {
+      display: flex;
+      flex-direction: row;
+      align-self: center;
+      position: relative;
+      top: 12vh;
+      gap: 4vw;
+    }
+
+    .avatar {
+      height: 20vh;
+      width: 10vw;
+
+      :hover {
+        cursor: pointer;
+      }
+    }
+
+    .blur {
+      height: 20vh;
+      width: 10vw;
+      filter: blur(3px);
+      -webkit-filter: blur(3px);
+    }
+  }
+
+  #login-image {
+    width: 65%;
+    display: flex;
+    background-color: #a3bcb6;
+
+    .home-button {
+      // background-color: #3c403d;
+      font-family: "Architects Daughter", cursive;
+      color: #3c403d;
+      position: relative;
+      align-self: flex-start;
+      left: 90%;
+      top: 2vh;
+      font-size: 1.5rem;
+      font-weight: 900;
+    }
+
+    .img {
+      width: 100%;
+      height: 100vh;
+    }
+  }
+}
