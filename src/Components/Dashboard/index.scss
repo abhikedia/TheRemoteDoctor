@@ -1,7 +1,7 @@
 #dashboard-main {
   display: flex;
   flex-direction: row;
-  background-color: #daded4;
+  background-color: #a3bcb6;
   width: 100%;
   height: 100vh;
 
@@ -137,4 +137,10 @@
     border-radius: 3vh;
     width: 18%;
   }
+}
+
+.appointment-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

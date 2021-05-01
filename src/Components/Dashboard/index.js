@@ -3,10 +3,13 @@ import { Avatar, Button } from "@material-ui/core";
 import ApartmentIcon from "@material-ui/icons/Apartment";
 import AllInclusiveIcon from "@material-ui/icons/AllInclusive";
 import Grid from "@material-ui/core/Grid";
-import Modal from '@material-ui/core/Modal';
+import Fade from "@material-ui/core/Fade";
 import AssessmentIcon from "@material-ui/icons/Assessment";
+import Backdrop from "@material-ui/core/Backdrop";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import TrackChangesIcon from '@material-ui/icons/TrackChanges';
+import TrackChangesIcon from "@material-ui/icons/TrackChanges";
+import Modal from "@material-ui/core/Modal";
+import Appointment from "../Appointment/index";
 import HistoryIcon from "@material-ui/icons/History";
 import Background from "../../assets/images/avatar.png";
 import "./index.scss";
@@ -17,10 +20,25 @@ export default function Dashboard() {
   const [age, setAge] = useState("22");
   const [height, setHeight] = useState("180");
   const [weight, setWeight] = useState("70");
+  const [newAppointment, setNewAppointment] = useState(false);
   const [avatar, setAvatar] = useState(Background);
 
-  return (
-    <div id="dashboard-main">
+  const newAppointmentModal = () => {
+    return (
+      <Modal
+      className="appointment-modal"
+        open={newAppointment}
+        onClose={() => setNewAppointment(false)}
+        // aria-labelledby="simple-modal-title"
+        // aria-describedby="simple-modal-description"
+      >
+        <Appointment />
+      </Modal>
+    );
+  };
+
+  const LeftPane = () => {
+    return (
       <div id="dashboard-sidepane-left">
         <div className="dashboard-header">
           <u>The Remote Doctor</u>
@@ -35,13 +53,19 @@ export default function Dashboard() {
               <Button className="dashboard-buttons">Overview</Button>
             </Grid>
           </Grid>
-
           <Grid container alignItems="center">
             <Grid item>
               <ApartmentIcon />
             </Grid>
             <Grid item>
-              <Button className="dashboard-buttons">New Appointment</Button>
+              <Button
+                className="dashboard-buttons"
+                onClick={() => {
+                  setNewAppointment(true);
+                }}
+              >
+                New Appointment
+              </Button>
             </Grid>
           </Grid>
 
@@ -53,7 +77,6 @@ export default function Dashboard() {
               <Button className="dashboard-buttons">Track Appointment</Button>
             </Grid>
           </Grid>
-
           <Grid container alignItems="center">
             <Grid item>
               <TrackChangesIcon />
@@ -62,7 +85,6 @@ export default function Dashboard() {
               <Button className="dashboard-buttons">Reports</Button>
             </Grid>
           </Grid>
-
           <Grid container alignItems="center">
             <Grid item>
               <HistoryIcon />
@@ -82,8 +104,13 @@ export default function Dashboard() {
           </Grid>
         </Grid>
       </div>
+    );
+  };
 
+  const MainPane = () => {
+    return (
       <div id="dashboard-mainportal">
+        {newAppointmentModal()}
         <div className="dashboard-user">
           <div id="dashboard-user-profile">
             <div className="dashboard-avatar">
@@ -112,8 +139,19 @@ export default function Dashboard() {
         </div>
         <div className="dashboard-chart">s</div>
       </div>
+    );
+  };
 
-      <div id="dashboard-sidepane-right">pp</div>
+  const RightPane = () => {
+    return <div id="dashboard-sidepane-right">pp</div>;
+  };
+
+  return (
+    <div id="dashboard-main">
+      {LeftPane()}
+      {MainPane()}
+      {RightPane()}
+      {}
     </div>
   );
 }

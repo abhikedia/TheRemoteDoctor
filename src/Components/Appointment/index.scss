@@ -1,39 +1,58 @@
-.appointment-main {
+#appointment-main {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #3c403d;
+  width: 38%;
+  position: absolute;
+  background-color: whitesmoke;
+  padding: 2%;
+
+  .heading {
     display: flex;
+    flex-grow: 1;
+    font-family: "Architects Daughter", cursive;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 2.2rem;
+    color: #3c403d;
+  }
+
+  #appointment-form {
+    display: flex;
+    gap: 7vw;
+    position: relative;
+    top: 4vh;
     flex-direction: row;
-    justify-content: center;
-    margin-top: 5vh;
-    gap: 2vw;
 
-    h2 {
-        display: flex;
-        justify-content: center;
+    .width {
+      width: 15vw !important;
     }
-}
 
-.appointment-card1-header {
-    background-color: black;
-    color: whitesmoke;
-    width: 30vw;
-}
+    .color {
+      color: #39603d;
+    }
 
-.appointment-card2-header {
-    background-color: black;
-    color: whitesmoke;
-    width: 30vw;
-    height: 16.5%;
-}
+    .form-col-1 {
+      display: flex;
+      gap: 3vh;
+      flex-direction: column;
+    }
 
-.appointment-card1-body {
-    margin-top: 7%;
-    margin-bottom: 7%;
-}
+    .form-col-2 {
+      display: flex;
+      flex-direction: column;
+      gap: 4vh;
+    }
+  }
 
-.appointment-card2-h2 {
-    padding-top: 5%;
-}
-
-.appointment-footer {
-    display: flex;
-    justify-content: center;
+  .book-button {
+    align-self: center;
+    width: 5vw;
+    font-family: "Architects Daughter", cursive;
+    font-weight: 800;
+    font-size: 1.2rem;
+    position: relative;
+    margin-top: 7vh;
+    background-color: #3c403d;
+  }
 }
