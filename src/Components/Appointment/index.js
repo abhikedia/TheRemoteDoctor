@@ -50,7 +50,6 @@ export default function Appointment() {
             fullWidth={true}
             color="secondary"
             variant="outlined"
-            required={true}
             onChange={(event) => {
               setStates(event.target.value);
             }}
@@ -65,7 +64,6 @@ export default function Appointment() {
             fullWidth={true}
             color="secondary"
             variant="outlined"
-            required={true}
             onChange={(event) => {
               selectDept(event.target.value);
             }}
@@ -81,7 +79,6 @@ export default function Appointment() {
             fullWidth={true}
             color="secondary"
             variant="outlined"
-            required={true}
             onChange={(event) => {
               setDoctor(event.target.value);
             }}
@@ -97,7 +94,6 @@ export default function Appointment() {
             fullWidth={true}
             color="secondary"
             variant="outlined"
-            required={true}
             onChange={(event) => {
               // setGender(event.target.value);
             }}
@@ -121,7 +117,6 @@ export default function Appointment() {
             fullWidth={true}
             color="secondary"
             variant="outlined"
-            required={true}
             onChange={(event) => {
               setCity(event.target.value);
             }}
@@ -136,7 +131,6 @@ export default function Appointment() {
             fullWidth={true}
             color="secondary"
             variant="outlined"
-            required={true}
             onChange={(event) => {
               selectHospital(event.target.value);
             }}

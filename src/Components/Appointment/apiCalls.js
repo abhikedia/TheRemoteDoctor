@@ -9,6 +9,7 @@ export const displayStateList = () => {
         {states.name}
       </option>
     );
+    return "";
   });
   return state;
 };
@@ -18,6 +19,7 @@ export const displayCities = (stateSelected) => {
   city.map((city) => {
     if (city.state === stateSelected)
       cities.push(<option value={city.name}>{city.name}</option>);
+    return "";
   });
   return cities;
 };
