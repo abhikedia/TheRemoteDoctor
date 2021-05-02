@@ -56,3 +56,17 @@ app.get("/checkPatientRegistration/:email/:password", function (req, res) {
     err ? res.send(err) : res.json(results);
   });
 });
+
+app.get("/getDepartments/", function (req, res) {
+  const query = `Select name from Department`;
+  connection.query(query, function (err, results) {
+    err ? res.send(err) : res.json(results);
+  });
+});
+
+app.get("/getHospitals/:state/:city", function (req, res) {
+  const query = `Select name from Hospitals where state = '${req.params.state}' and city = '${req.params.city}'`;
+  connection.query(query, function (err, results) {
+    err ? res.send(err) : res.json(results);
+  });
+});
