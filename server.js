@@ -58,14 +58,25 @@ app.get("/checkPatientRegistration/:email/:password", function (req, res) {
 });
 
 app.get("/getDepartments/", function (req, res) {
-  const query = `Select name from Department`;
+  const query = `Select * from Department`;
   connection.query(query, function (err, results) {
     err ? res.send(err) : res.json(results);
   });
 });
 
 app.get("/getHospitals/:state/:city", function (req, res) {
-  const query = `Select name from Hospitals where state = '${req.params.state}' and city = '${req.params.city}'`;
+  const query = `Select hospitalid, name from Hospitals where state = '${req.params.state}' and city = '${req.params.city}'`;
+  connection.query(query, function (err, results) {
+    err ? res.send(err) : res.json(results);
+  });
+});
+
+app.get("/getDoctors/:city/:dept/:hospital", function (req, res) {
+  let query;
+  if (req.params.hospital !== "none")
+    query = `Select name, fees from Doctors where city = '${req.params.city}' and dept = ${req.params.dept} and hospital = ${req.params.hospital}`;
+  else
+    query = `Select name, fees from Doctors where city = '${req.params.city}' and dept = ${req.params.dept}`;
   connection.query(query, function (err, results) {
     err ? res.send(err) : res.json(results);
   });

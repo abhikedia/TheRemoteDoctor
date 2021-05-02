@@ -75,6 +75,7 @@ INSERT INTO Department VALUES (7, "Neurology");
 INSERT INTO Department VALUES (8, "Obstetrics & Gynecology");
 INSERT INTO Department VALUES (9, "Endocrinology");
 
+
 INSERT INTO Hospitals VALUES (1,"Bombay Hospital Institute of Medical Centre", "Maharastra", "Mumbai");
 INSERT INTO Hospitals VALUES (2,"Breach Candy Hospital and Research Centre", "Tamil Nadu", "Chennai");
 INSERT INTO Hospitals VALUES (3,"Apollo Hospital", "Karnataka", "Bengaluru");
@@ -89,5 +90,6 @@ INSERT INTO Hospitals VALUES (9,"Base Hospital", "Maharastra", "Mumbai");
 INSERT INTO Doctors VALUES (1,"Dr.Ramesh Kumar", 1,950, "MD", "09:00-12:00;16:00-18:00", "Anaesthesiology" ," Maharastra" , "Mumbai", "9452634947@ybl", "9452634947",1, "123@gmail.com");
 INSERT INTO Doctors VALUES (2,"Dr.Avinash Singh", 2,800,"MD","09:00-12:00;16:00-18:01","Physiology" ,"Maharastra","Mumbai","9452634947@ybl", "9452634947",2, "1233@gmail.com");
 INSERT INTO Doctors VALUES (3,"Dr. Taher Abbas Mithi", 3,1600,"MS","09:00-12:00;16:00-18:02","General Surgery" ,"Tamil Nadu","Chennai" ,"9452634947@ybl", "9452634947",3, "123w@gmail.com");
-INSERT INTO Doctors VALUES (4,"Dr. Saurabh Bhargava" , 4,900,"MD","09:00-12:00;16:00-18:03","Anaesthesiology","Karnataka","Benglore","9452634947@ybl", "9452634947",4, "1423@gmail.com");
+INSERT INTO Doctors VALUES (4,"Dr. Saurabh Bhargava" , 4,900,"MD","09:00-12:00;16:00-18:03","Anaesthesiology","Karnataka","Bengaluru","9452634947@ybl", "9452634947",4, "1423@gmail.com");
 INSERT INTO Doctors VALUES (5,"Dr. A. K. Patel", 5,1500,"MS","09:00-12:00;16:00-18:04","General Surgery" , "Delhi","Gurgaon","9452634947@ybl", "9452634947",5, "1243@gmail.com");
+INSERT INTO Doctors VALUES (6,"Dr. Abhishek", 8,1500,"MS","09:00-12:00;16:00-18:04","General Surgery" , "Karnataka","Bengaluru","9452634947@ybl", "9452634947",5, "12s43@gmail.com");

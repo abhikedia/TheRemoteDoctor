@@ -3,15 +3,18 @@ import "./index.scss";
 import TextField from "@material-ui/core/TextField";
 import states from "../utils/states";
 import city from "../utils/cities";
-import { Button, Avatar, Select, InputLabel } from "@material-ui/core";
+import { Button, Select, InputLabel } from "@material-ui/core";
 
 export default function Appointment() {
   const [otpText, setOTP] = useState("Click to get OTP");
   const [stateSelected, setStates] = useState("");
   const [citySelected, setCity] = useState("");
+  const [department, selectDepartment] = useState([]);
   const [dept, selectDept] = useState("");
   const [hospital, selectHospital] = useState("");
   const [hospitals, setHospitals] = useState([]);
+  const [docs, selectDoctor] = useState([]);
+  const [doctor, setDoctor] = useState("");
 
   let departments = [];
 
@@ -22,13 +25,12 @@ export default function Appointment() {
       .then((response) => {
         for (var i = 0; i < response.length; i++)
           departments.push(
-            <option value={response[i].name} key={states.key}>
-              {response[i].name}
-            </option>
+            <option value={response[i].deptid}>{response[i].name}</option>
           );
       })
       .catch((err) => console.log(err));
-  });
+    selectDepartment(departments);
+  }, []);
 
   useEffect(() => {
     let hosp = [];
@@ -43,16 +45,39 @@ export default function Appointment() {
         .then((response) => {
           for (var i = 0; i < response.length; i++)
             hosp.push(
+              <option value={response[i].hospitalid}>{response[i].name}</option>
+            );
+        })
+        .catch((err) => console.log(err));
+      setHospitals(hosp);
+    }
+  }, [citySelected]);
+
+  useEffect(() => {
+    let doc = [];
+    let temp = hospital !== "" ? hospital : "none";
+    if (citySelected !== "" && dept !== "") {
+      var url =
+        "http://localhost:4000/getDoctors/" +
+        citySelected +
+        "/" +
+        dept +
+        "/" +
+        temp;
+      fetch(url)
+        .then((response) => response.json())
+        .then((response) => {
+          for (var i = 0; i < response.length; i++)
+            doc.push(
               <option value={response[i].name} key={states.key}>
-                {response[i].name}
+                {response[i].name + "Fees:" + response[i].fees}
               </option>
             );
         })
         .catch((err) => console.log(err));
-
-      setHospitals(hosp);
+      selectDoctor(doc);
     }
-  }, [citySelected]);
+  }, [dept, hospital]);
 
   const handleOTP = () => {
     setOTP("Enter OTP Received, Click again to resend!");
@@ -109,7 +134,7 @@ export default function Appointment() {
               selectDept(event.target.value);
             }}
           >
-            {departments}
+            {department}
           </Select>
         </div>
 
@@ -122,12 +147,10 @@ export default function Appointment() {
             variant="outlined"
             required={true}
             onChange={(event) => {
-              // setGender(event.target.value);
+              setDoctor(event.target.value);
             }}
           >
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Trans">Trans</option>
+            {docs}
           </Select>
         </div>
 
