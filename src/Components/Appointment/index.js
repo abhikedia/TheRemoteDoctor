@@ -170,7 +170,7 @@ export default function Appointment() {
         {RightCol()}
       </div>
       <Button color="secondary" variant="contained" className="book-button">
-        Book
+        Proceed to Payment
       </Button>
     </div>
   );

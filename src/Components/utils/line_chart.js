@@ -30,8 +30,8 @@ export default function Graph() {
         // space of its parent element automatically
         <div
             style={{
-                width: '400px',
-                height: '300px'
+                width: '500px',
+                height: '220px'
             }}
         >
             <Chart data={data} axes={axes} />

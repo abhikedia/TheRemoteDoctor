@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../Header/index';
 import Card from '../Cards/index';
 import Image from '../../assets/images/image_link';
-import Graph from '../Graph/index';
+import Graph from '../utils/line_chart';
 import './index.scss';
 
 export default function Records() {

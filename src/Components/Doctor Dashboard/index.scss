@@ -1,0 +1,68 @@
+#doctor-main {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  // background-color: #daded4;
+
+  #home-button {
+    display: flex;
+    flex-direction: row;
+    .header {
+      font-weight: bold;
+      font-family: "Architects Daughter", cursive;
+      font-size: 4.5vh;
+      color: #3c403d;
+    }
+
+    .home {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  #row-1 {
+    display: flex;
+    flex-direction: row;
+    height: 43%;
+
+    .hello-doctor {
+      width: 50%;
+      display: flex;
+      align-self: center;
+      justify-content: center;
+      font-weight: bold;
+      font-family: "Architects Daughter", cursive;
+      font-size: 4.5vh;
+      color: #3c403d;
+    }
+
+    .patients-graph {
+      display: flex;
+      align-self: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 50%;
+    }
+  }
+
+  .hr {
+    width: 80vw;
+    position: relative;
+    bottom: 3%;
+  }
+
+  #row-2 {
+    display: flex;
+    flex-direction: row;
+    height: 49%;
+
+    .overall-graph {
+      width: 60%;
+    }
+
+    .upcoming-patients {
+      width: 40%;
+    }
+  }
+}
