@@ -16,6 +16,9 @@ export default function SignUp() {
   const [errorMessage, setErrorMessage] = useState("");
   const [avatar, setAvatar] = useState(Background);
   const [count, setCount] = useState(0);
+  const [height, setHeight] = useState("NA");
+  const [weight, setWeight] = useState("NA");
+  const [blood, setBlood] = useState("NA");
 
   useEffect(() => {
     (async () => {
@@ -63,6 +66,9 @@ export default function SignUp() {
           phone: phone,
           avatar: avatar,
           dob: dob,
+          height: height,
+          weight: weight,
+          blood: blood,
         }), // data can be `string` or {object}!
         headers: {
           "Content-Type": "application/json",
@@ -81,13 +87,7 @@ export default function SignUp() {
 
   return (
     <div>
-      <Header />
       <div className="signup-main">
-        <div className="signup-header">
-          <h2>
-            Hey, We are glad you are here!&nbsp; Please SignUp to continue.
-          </h2>
-        </div>
         <div className="signup-col">
           <div className="signup-col-1">
             <Avatar
@@ -136,14 +136,13 @@ export default function SignUp() {
                 />
               </div>
               <div>
-                <InputLabel>Gender</InputLabel>
+                <InputLabel required>Gender</InputLabel>
                 <Select
                   label="Gender"
                   fullWidth={true}
                   color="secondary"
                   variant="outlined"
                   placeholder="Gender"
-                  required={true}
                   onChange={(event) => {
                     setGender(event.target.value);
                   }}
@@ -162,6 +161,41 @@ export default function SignUp() {
                   variant="outlined"
                   onChange={(event) => {
                     setPhone(event.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                <TextField
+                  label="Height (in cms)"
+                  color="secondary"
+                  type="Number"
+                  fullWidth={true}
+                  variant="outlined"
+                  onChange={(event) => {
+                    setHeight(event.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                <TextField
+                  label="Weight (in kgs)"
+                  color="secondary"
+                  type="Number"
+                  fullWidth={true}
+                  variant="outlined"
+                  onChange={(event) => {
+                    setWeight(event.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                <TextField
+                  label="Blood Group"
+                  color="secondary"
+                  fullWidth={true}
+                  variant="outlined"
+                  onChange={(event) => {
+                    setBlood(event.target.value);
                   }}
                 />
               </div>

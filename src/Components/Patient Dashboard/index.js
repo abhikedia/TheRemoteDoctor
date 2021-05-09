@@ -3,34 +3,26 @@ import { Avatar, Button } from "@material-ui/core";
 import ApartmentIcon from "@material-ui/icons/Apartment";
 import AllInclusiveIcon from "@material-ui/icons/AllInclusive";
 import Grid from "@material-ui/core/Grid";
-import Fade from "@material-ui/core/Fade";
 import AssessmentIcon from "@material-ui/icons/Assessment";
-import Backdrop from "@material-ui/core/Backdrop";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import TrackChangesIcon from "@material-ui/icons/TrackChanges";
 import Modal from "@material-ui/core/Modal";
 import Appointment from "../Appointment/index";
+import { connect } from "react-redux";
 import HistoryIcon from "@material-ui/icons/History";
 import Background from "../../assets/images/avatar.png";
 import "./index.scss";
+import store from "../../store";
 
-export default function Dashboard() {
-  const [name, setName] = useState("Abhishek Kedia");
-  const [blood, setBlood] = useState("B+");
-  const [age, setAge] = useState("22");
-  const [height, setHeight] = useState("180");
-  const [weight, setWeight] = useState("70");
+function Dashboard(props) {
   const [newAppointment, setNewAppointment] = useState(false);
-  const [avatar, setAvatar] = useState(Background);
 
   const newAppointmentModal = () => {
     return (
       <Modal
-      className="appointment-modal"
+        className="appointment-modal"
         open={newAppointment}
         onClose={() => setNewAppointment(false)}
-        // aria-labelledby="simple-modal-title"
-        // aria-describedby="simple-modal-description"
       >
         <Appointment />
       </Modal>
@@ -114,25 +106,27 @@ export default function Dashboard() {
         <div className="dashboard-user">
           <div id="dashboard-user-profile">
             <div className="dashboard-avatar">
-              <Avatar src={avatar} />
+              <Avatar src={props.avatar} />
             </div>
-            <div className="dashboard-name">{name}</div>
+            <div className="dashboard-name">{props.name}</div>
             <div className="profile-data">
               <div>
                 <span className="data-head">Age: </span>
-                <span className="data-ans">{age}</span>
+                <span className="data-ans">{}</span>
               </div>
               <div>
                 <span className="data-head">Height: </span>
-                <span className="data-ans">{height}</span>
+                <span className="data-ans">{props.height}</span>
+                <span className="data-ans">&nbsp;cm</span>
               </div>
               <div>
                 <span className="data-head">Weight: </span>
-                <span className="data-ans">{weight}</span>
+                <span className="data-ans">{props.weight}</span>
+                <span className="data-ans">&nbsp;kg</span>
               </div>
               <div>
                 <span className="data-head">Blood Group: </span>
-                <span className="data-ans">{blood}</span>
+                <span className="data-ans">{props.blood}</span>
               </div>
             </div>
           </div>
@@ -151,7 +145,23 @@ export default function Dashboard() {
       {LeftPane()}
       {MainPane()}
       {RightPane()}
-      {}
     </div>
   );
 }
+
+const mapStatetoProps = (state) => {
+  console.log(state.name);
+  return {
+    name: state.patientLogAction.name,
+    gender: state.patientLogAction.gender,
+    avatar: state.patientLogAction.avatar,
+    dob: state.patientLogAction.dob,
+    height: state.patientLogAction.height,
+    weight: state.patientLogAction.weight,
+    blood: state.patientLogAction.blood,
+  };
+};
+
+console.log(store.getState());
+
+export default connect(mapStatetoProps)(Dashboard);

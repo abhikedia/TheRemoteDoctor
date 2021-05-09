@@ -20,7 +20,7 @@ CREATE TABLE `Appointments` (
 	`appointment_number` INT NOT NULL,
 	`patient_id` INT NOT NULL,
 	`date` DATE NOT NULL,
-	`time` TIME NOT NULL,
+	`time` TIME NULL,
 	`doctor_id` INT NOT NULL,
 	PRIMARY KEY (`appointment_number`)
 );

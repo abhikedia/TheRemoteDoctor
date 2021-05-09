@@ -50,6 +50,15 @@ app.get("/getPatientCount/", function (req, res) {
   );
 });
 
+app.get("/getAppointmentNumber/", function (req, res) {
+  connection.query(
+    "select appointment_number from Appointments order by appointment_number DESC LIMIT 1",
+    function (err, results) {
+      err ? res.send(err) : res.json({ data: results });
+    }
+  );
+});
+
 app.get("/checkPatientRegistration/:email/:password", function (req, res) {
   const query = `Select * from Patients where email = '${req.params.email}' and password = '${req.params.password}'`;
   connection.query(query, function (err, results) {
