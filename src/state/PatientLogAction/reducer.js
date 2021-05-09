@@ -1,4 +1,5 @@
 const initialState = {
+  id: "",
   email: "",
   name: "",
   gender: "",
@@ -11,6 +12,7 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case "LogIn":
       const data = action.payload;
+      state.id = data.patient_id;
       state.email = data.email;
       state.name = data.name;
       state.gender = data.gender;

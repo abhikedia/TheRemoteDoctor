@@ -7,7 +7,7 @@ import Patient from "../../assets/images/patient.jpg";
 import TextField from "@material-ui/core/TextField";
 import Avatar from "@material-ui/core/Avatar";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
-import { LogIn } from "../../state/LogAction/action";
+import { LogIn } from "../../state/PatientLogAction/action";
 import store from "../../store";
 import "./index.scss";
 

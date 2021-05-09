@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Alert from "@material-ui/lab/Alert";
 import { Button, Select, InputLabel, TextField } from "@material-ui/core";
 import {
   departments,
@@ -10,7 +11,6 @@ import {
 import "./index.scss";
 
 export default function Appointment() {
-  const [otpText, setOTP] = useState("Click to get OTP");
   const [stateSelected, setStates] = useState("");
   const [citySelected, setCity] = useState("");
   const [department, selectDepartment] = useState([]);
@@ -19,9 +19,18 @@ export default function Appointment() {
   const [hosp, setHospitals] = useState([]);
   const [docs, selectDoctor] = useState([]);
   const [doctor, setDoctor] = useState("");
+  const [notes, setNotes] = useState("");
+  const [count, setCount] = useState("");
 
   useEffect(() => {
     selectDepartment(departments());
+    const url = "http://localhost:4000/getAppointmentNumber/";
+    fetch(url)
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.data.length == 0) setCount(0);
+        else setCount(response.data);
+      });
   }, []);
 
   useEffect(() => {
@@ -36,8 +45,11 @@ export default function Appointment() {
     }
   }, [dept, hospital]);
 
-  const handleOTP = () => {
-    setOTP("Enter OTP Received, Click again to resend!");
+  const notifyDoctor = () => {
+    const data = {
+      appointment_number: count + 1,
+      // patient_id=
+    };
   };
 
   const LeftCol = () => {
@@ -84,23 +96,6 @@ export default function Appointment() {
             }}
           >
             {docs}
-          </Select>
-        </div>
-
-        <div>
-          <InputLabel className="color">Select Time</InputLabel>
-          <Select
-            required={true}
-            fullWidth={true}
-            color="secondary"
-            variant="outlined"
-            onChange={(event) => {
-              // setGender(event.target.value);
-            }}
-          >
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Trans">Trans</option>
           </Select>
         </div>
       </div>
@@ -151,12 +146,6 @@ export default function Appointment() {
             />
           </form>
         </div>
-
-        <TextField
-          className="width"
-          label={otpText}
-          onClick={() => handleOTP()}
-        />
       </div>
     );
   };
@@ -169,7 +158,19 @@ export default function Appointment() {
         {LeftCol()}
         {RightCol()}
       </div>
-      <Button color="secondary" variant="contained" className="book-button">
+      <div>
+        <TextField
+          className="notes"
+          label="Notes for doctor (if any)"
+          onChange={(event) => setNotes(event.target.value)}
+        />
+      </div>
+      <Button
+        color="secondary"
+        variant="contained"
+        className="book-button"
+        onClick={() => notifyDoctor()}
+      >
         Proceed to Payment
       </Button>
     </div>
