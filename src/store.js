@@ -1,8 +1,8 @@
 import { combineReducers, createStore } from "redux";
-import LogAction from "./state/PatientLogAction/reducer";
+import patientLogAction from "./state/PatientLogAction/reducer";
 
 const reducer = combineReducers({
-  LogAction,
+  patientLogAction,
 });
 
 const store = createStore(reducer);

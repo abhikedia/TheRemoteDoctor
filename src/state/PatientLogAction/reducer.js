@@ -6,19 +6,25 @@ const initialState = {
   phone: "",
   avatar: "",
   dob: "",
+  height: "",
+  weight: "",
+  blood: "",
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case "LogIn":
       const data = action.payload;
-      state.id = data.patient_id;
+      state.id = data.id;
       state.email = data.email;
       state.name = data.name;
       state.gender = data.gender;
       state.phone = data.phone;
       state.avatar = data.avatar;
       state.dob = data.dob;
+      state.weight = data.weight;
+      state.height = data.height;
+      state.blood = data.blood;
       break;
 
     case "LogOut":

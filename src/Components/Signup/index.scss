@@ -1,5 +1,7 @@
 .signup-main {
     display: flex;
+    height: 100vh;
+    // background-color: #daded4;
     flex-direction: column;
 }
 
@@ -34,12 +36,14 @@
 
 .signup-avatar {
     position: relative;
-    top: 10%;
-    height: 90% !important;
+    top: 30%;
+    height: 60% !important;
     width: 40% !important;
 }
 
 .signup-col-2 {
+    position: relative;
+    top: 10vh;
     width: 100%;
 }
 
@@ -47,7 +51,8 @@
     display: flex;
     justify-content: center;
     position: relative;
-    top: 6vh;
+    // top: 8vh;
+    right: 5vw;
 }
 
 .signup-error {
@@ -57,4 +62,5 @@
 
 .signup-input {
     position: absolute;
+    top: 90%;
 }
