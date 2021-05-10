@@ -5,8 +5,9 @@ import Doctor from "../../assets/images/doctor.png";
 import Patient from "../../assets/images/patient.jpg";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import { LogIn } from "../../state/PatientLogAction/action";
-import Dashboard from "../Patient Dashboard/index";
+import { doctorLogIn } from "../../state/DoctorLogAction/action";
 import { useHistory } from "react-router-dom";
+import { patientAction, doctorAction } from "./apiCalls";
 import "./index.scss";
 import { connect } from "react-redux";
 
@@ -16,7 +17,6 @@ function PatientLogin(props) {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState(""); //Patient or Doctor
   const [errorMessage, setErrorMessage] = useState("");
-  const [loggedIn, setLoggedIn] = useState(0);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -30,29 +30,13 @@ function PatientLogin(props) {
         : "http://localhost:4000/checkDoctorRegistration/";
     url += email + "/" + password;
 
-    fetch(url)
-      .then((response) => response.json())
-      .then((response) => {
-        if (!response.length) {
-          setErrorMessage("Incorrect Email/Password or user not registered!");
-          return;
-        }
-        let data = {
-          id: response[0].patientid,
-          email: response[0].email,
-          name: response[0].name,
-          gender: response[0].gender,
-          phone: response[0].phone,
-          avatar: response[0].avatar,
-          dob: response[0].dob,
-          blood: response[0].blood,
-          height: response[0].height,
-          weight: response[0].weight,
-        };
-        props.logInActionHandler(data);
-      })
-      .then(history.push("/dashboard"))
-      .catch((err) => console.log(err));
+    role === "patient"
+      ? patientAction(url, props, history)
+        ? setErrorMessage("Incorrect Email/Password or patient not registered!")
+        : setErrorMessage("")
+      : doctorAction(url, props, history)
+      ? setErrorMessage("Incorrect Email/Password or user doctor registered!")
+      : setErrorMessage("");
   };
 
   const renderLoginPage = () => {
@@ -151,11 +135,12 @@ function PatientLogin(props) {
     );
   };
 
-  return loggedIn ? <Dashboard /> : renderLoginPage();
+  return renderLoginPage();
 }
 
 const mapDispatchToProps = (dispatch) => ({
   logInActionHandler: (data) => dispatch(LogIn(data)),
+  doctorLoginActionHandler: (data) => dispatch(doctorLogIn(data)),
 });
 
 export default connect(null, mapDispatchToProps)(PatientLogin);

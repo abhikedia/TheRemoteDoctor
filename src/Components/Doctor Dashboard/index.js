@@ -2,8 +2,9 @@ import { Button } from "@material-ui/core";
 import LineGraph from "../utils/line_chart";
 import React from "react";
 import "./index.scss";
+import { connect } from "react-redux";
 
-export default function Doctor() {
+function Doctor(props) {
   return (
     <div id="doctor-main">
       <div id="main-area">
@@ -14,7 +15,7 @@ export default function Doctor() {
         <div id="row-1">
           <div className="hello-doctor">
             Welcome Back,
-            <br /> Dr. Abcd
+            <br /> {props.name}
           </div>
           <div className="patients-graph">
             <h3>Analytics</h3>
@@ -31,3 +32,9 @@ export default function Doctor() {
     </div>
   );
 }
+
+const mapStatetoProps = (state) => ({
+  name: state.doctorLogAction.name,
+});
+
+export default connect(mapStatetoProps, null)(Doctor);

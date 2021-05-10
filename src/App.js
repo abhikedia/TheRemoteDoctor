@@ -22,7 +22,7 @@ export default function App() {
           <Route path="/records" component={Records} />
           <Route path="/dashboard" component={patientDashboard} />
           <Route path="/graph" component={Graph} />
-          <Route path="/doctor" component={doctorDashboard} />
+          <Route path="/doctorDashboard" component={doctorDashboard} />
           <Route path="/trackappointment" component={TrackAppointment} />
         </Switch>
       </Provider>

@@ -80,7 +80,6 @@ export const doctors = (hospital, citySelected, dept) => {
 };
 
 export const createAppointment = (data) => {
-  console.log("Inside Function");
   const url = "http://localhost:4000/createAppointment";
   fetch(url, {
     method: "POST", // or 'PUT'
