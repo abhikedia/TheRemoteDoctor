@@ -20,8 +20,9 @@ CREATE TABLE `Appointments` (
 	`appointment_number` INT NOT NULL,
 	`patient_id` INT NOT NULL,
 	`date` DATE NOT NULL,
-	`time` TIME NULL,
+	`time` TIME,
 	`doctor_id` INT NOT NULL,
+	`notes` varchar(500),
 	PRIMARY KEY (`appointment_number`)
 );
 

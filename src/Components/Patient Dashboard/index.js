@@ -10,7 +10,6 @@ import Modal from "@material-ui/core/Modal";
 import Appointment from "../Appointment/index";
 import { connect } from "react-redux";
 import HistoryIcon from "@material-ui/icons/History";
-import Background from "../../assets/images/avatar.png";
 import "./index.scss";
 import store from "../../store";
 
@@ -149,19 +148,16 @@ function Dashboard(props) {
   );
 }
 
-const mapStatetoProps = (state) => {
-  console.log(state.name);
-  return {
-    name: state.patientLogAction.name,
-    gender: state.patientLogAction.gender,
-    avatar: state.patientLogAction.avatar,
-    dob: state.patientLogAction.dob,
-    height: state.patientLogAction.height,
-    weight: state.patientLogAction.weight,
-    blood: state.patientLogAction.blood,
-  };
-};
+const mapStatetoProps = (state) => ({
+  name: state.patientLogAction.name,
+  gender: state.patientLogAction.gender,
+  avatar: state.patientLogAction.avatar,
+  dob: state.patientLogAction.dob,
+  height: state.patientLogAction.height,
+  weight: state.patientLogAction.weight,
+  blood: state.patientLogAction.blood,
+});
 
 console.log(store.getState());
 
-export default connect(mapStatetoProps)(Dashboard);
+export default connect(mapStatetoProps, null)(Dashboard);

@@ -70,11 +70,29 @@ export const doctors = (hospital, citySelected, dept) => {
     .then((response) => {
       for (var i = 0; i < response.length; i++)
         doc.push(
-          <option value={response[i].name}>
+          <option value={response[i].doctorid}>
             {response[i].name + "Fees:" + response[i].fees}
           </option>
         );
     })
     .catch((err) => console.log(err));
   return doc;
+};
+
+export const createAppointment = (data) => {
+  console.log("Inside Function");
+  const url = "http://localhost:4000/createAppointment";
+  fetch(url, {
+    method: "POST", // or 'PUT'
+    mode: "cors",
+    body: data, // data can be `string` or {object}!
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.body)
+    .then((response) => {
+      console.log("Success");
+    })
+    .catch((error) => console.error("Error:", error));
 };

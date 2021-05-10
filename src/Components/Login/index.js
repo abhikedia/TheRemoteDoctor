@@ -6,16 +6,20 @@ import Patient from "../../assets/images/patient.jpg";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import { LogIn } from "../../state/PatientLogAction/action";
 import Dashboard from "../Patient Dashboard/index";
+import { useHistory } from "react-router-dom";
 import "./index.scss";
+import { connect } from "react-redux";
 
-export default function Login() {
+function PatientLogin(props) {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState(""); //Patient or Doctor
   const [errorMessage, setErrorMessage] = useState("");
   const [loggedIn, setLoggedIn] = useState(0);
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     if (email === "" || password === "" || role === "") {
       setErrorMessage("All the fields are compulsory!");
       return;
@@ -33,7 +37,7 @@ export default function Login() {
           setErrorMessage("Incorrect Email/Password or user not registered!");
           return;
         }
-        const data = {
+        let data = {
           id: response[0].patientid,
           email: response[0].email,
           name: response[0].name,
@@ -45,9 +49,9 @@ export default function Login() {
           height: response[0].height,
           weight: response[0].weight,
         };
-        LogIn(data);
+        props.logInActionHandler(data);
       })
-      .then(setLoggedIn(1))
+      .then(history.push("/dashboard"))
       .catch((err) => console.log(err));
   };
 
@@ -129,7 +133,7 @@ export default function Login() {
             <Button
               className="login-button"
               size="large"
-              onClick={() => onSubmit()}
+              onClick={(event) => onSubmit(event)}
             >
               Login
             </Button>
@@ -149,3 +153,9 @@ export default function Login() {
 
   return loggedIn ? <Dashboard /> : renderLoginPage();
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  logInActionHandler: (data) => dispatch(LogIn(data)),
+});
+
+export default connect(null, mapDispatchToProps)(PatientLogin);

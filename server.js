@@ -41,6 +41,18 @@ app.post("/addPatient", function (req, res) {
   );
 });
 
+app.post("/createAppointment", function (req, res) {
+  var postData = req.body;
+  connection.query(
+    "INSERT INTO Appointments SET ?",
+    postData,
+    function (error, results, fields) {
+      if (error) throw error;
+      res.end(JSON.stringify(results));
+    }
+  );
+});
+
 app.get("/getPatientCount/", function (req, res) {
   connection.query(
     "select patientid from Patients order by patientid DESC LIMIT 1",
@@ -83,9 +95,9 @@ app.get("/getHospitals/:state/:city", function (req, res) {
 app.get("/getDoctors/:city/:dept/:hospital", function (req, res) {
   let query;
   if (req.params.hospital !== "none")
-    query = `Select name, fees from Doctors where city = '${req.params.city}' and dept = ${req.params.dept} and hospital = ${req.params.hospital}`;
+    query = `Select doctorid, name, fees from Doctors where city = '${req.params.city}' and dept = ${req.params.dept} and hospital = ${req.params.hospital}`;
   else
-    query = `Select name, fees from Doctors where city = '${req.params.city}' and dept = ${req.params.dept}`;
+    query = `Select doctorid, name, fees from Doctors where city = '${req.params.city}' and dept = ${req.params.dept}`;
   connection.query(query, function (err, results) {
     err ? res.send(err) : res.json(results);
   });

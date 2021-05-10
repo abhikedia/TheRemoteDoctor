@@ -7,10 +7,12 @@ import {
   doctors,
   displayStateList,
   displayCities,
+  createAppointment,
 } from "./apiCalls";
+import { connect } from "react-redux";
 import "./index.scss";
 
-export default function Appointment() {
+function Appointment(props) {
   const [stateSelected, setStates] = useState("");
   const [citySelected, setCity] = useState("");
   const [department, selectDepartment] = useState([]);
@@ -21,15 +23,16 @@ export default function Appointment() {
   const [doctor, setDoctor] = useState("");
   const [notes, setNotes] = useState("");
   const [count, setCount] = useState("");
+  const [date, setDate] = useState("");
 
   useEffect(() => {
     selectDepartment(departments());
     const url = "http://localhost:4000/getAppointmentNumber/";
-    fetch(url)
+    let count = fetch(url)
       .then((response) => response.json())
       .then((response) => {
         if (response.data.length == 0) setCount(0);
-        else setCount(response.data);
+        else setCount(response.data[0].appointment_number);
       });
   }, []);
 
@@ -48,8 +51,14 @@ export default function Appointment() {
   const notifyDoctor = () => {
     const data = {
       appointment_number: count + 1,
-      // patient_id=
+      patient_id: props.patientid,
+      doctor_id: doctor,
+      date: date,
+      time: "",
+      notes: notes,
     };
+    console.log("data", data);
+    createAppointment(JSON.stringify(data));
   };
 
   const LeftCol = () => {
@@ -138,10 +147,13 @@ export default function Appointment() {
           <form noValidate>
             <TextField
               type="date"
-              defaultValue="2017-05-24"
+              defaultValue="0000-00-00"
               fullWidth={true}
               InputLabelProps={{
                 shrink: true,
+              }}
+              onChange={(event) => {
+                setDate(event.target.value);
               }}
             />
           </form>
@@ -149,6 +161,7 @@ export default function Appointment() {
       </div>
     );
   };
+
   return (
     <div id="appointment-main">
       <div className="heading">
@@ -171,8 +184,16 @@ export default function Appointment() {
         className="book-button"
         onClick={() => notifyDoctor()}
       >
-        Proceed to Payment
+        Notify Doctor
       </Button>
     </div>
   );
 }
+
+const mapStatetoProps = (state) => {
+  return {
+    patientid: state.patientLogAction.id,
+  };
+};
+
+export default connect(mapStatetoProps)(Appointment);
