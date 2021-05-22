@@ -1,5 +1,6 @@
 const initialState = {
   displayTimeKeeper: false,
+  appointment_number: "",
 };
 
 export default function reducer(state = initialState, action) {
@@ -8,6 +9,7 @@ export default function reducer(state = initialState, action) {
       return {
         // ...state,
         displayTimeKeeper: true,
+        appointment_number: action.payload,
       };
 
     case "hideClock":

@@ -4,18 +4,10 @@
   flex-direction: row;
   background-color: #a3bcb6;
 
-  .timer-modal {
-    align-self: center;
-    align-content: center;
-    justify-content: center;
-    justify-self: center;
-    justify-items: center;
-    display: flex;
-  }
-
   #main-area {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    width: 80%;
 
     #home-button {
       display: flex;
@@ -37,7 +29,7 @@
     #row-1 {
       display: flex;
       flex-direction: row;
-      height: 43%;
+      height: 50%;
 
       .hello-doctor {
         width: 50%;
@@ -59,18 +51,25 @@
       }
     }
 
-    .hr {
-      width: 80vw;
-      position: relative;
-      bottom: 3%;
-    }
+    #upcoming-patients {
+      height: 50%;
+      background-color: white;
 
-    #row-2 {
-      display: flex;
-      flex-direction: row;
-      height: 49%;
+      .upcoming-patients-text {
+        font-size: 2rem;
+        padding: 0.5em;
+        font-family: "Architects Daughter", cursive;
+        font-weight: bolder;
+      }
+
+      .patient-card {
+        padding: 1em;
+        padding-left: 6vw;
+        padding-right: 6vw;
+      }
     }
   }
+
   #schedule-patients {
     width: 20%;
     display: flex;
@@ -79,9 +78,9 @@
 
     .schedule-header {
       color: #3c403d;
-      font-size: 2.1em;
-      // position: relative;
+      font-size: 2.2em;
       margin-top: 2vh;
+      padding-left: 3vw;
       font-family: "Architects Daughter", cursive;
       font-weight: bolder;
     }

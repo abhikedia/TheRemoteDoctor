@@ -4,7 +4,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import { updatePatientTime } from "./apiCalls";
+
 import Modal from "@material-ui/core/Modal";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import { showTimeKeeper } from "../../state/TimePicker/action";
@@ -15,16 +15,28 @@ import "./index.scss";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    flexDirection: "row",
     backgroundColor: "gray",
-    height: "8vh",
+    height: '3em'
   },
   details: {
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
     width: "80%",
+    alignSelf: "center",
   },
-  content: {
-    flex: "1 0 auto",
+  name: {
+    width: "40%",
+    fontSize: "2em",
+    paddingLeft: "2vw",
+  },
+  date: {
+    fontSize: "1.3em",
+    alignSelf: "center",
+    width: "100%",
+    display: "flex",
+    justifyContent: "flex-end",
+    paddingRight: '1vw'
   },
   icon: {
     backgroundColor: "whitesmoke",
@@ -34,9 +46,17 @@ const useStyles = makeStyles((theme) => ({
   },
   cover: {
     alignSelf: "center",
-    fontSize: "2.5em",
+    fontSize: "1.5em",
   },
 }));
+
+const timeSelectorModal = () => {
+  return (
+    <Modal className="timer-modal" open={true}>
+      <TimeKeeper />
+    </Modal>
+  );
+};
 
 function MediaControlCard(props) {
   const classes = useStyles();
@@ -46,41 +66,22 @@ function MediaControlCard(props) {
     console.log(props);
   }, []);
 
-  const callBack = (time, id) => {
-    console.log("parent", time, id);
-    updatePatientTime(time, id);
-  };
-
-  const timeSelectorModal = () => {
-    return (
-      <Modal className="timer-modal" open={true}>
-        <TimeKeeper parentCallBack={callBack} />
-      </Modal>
-    );
-  };
-
   return (
     <div>
       {props.displayTimeSelector ? timeSelectorModal() : ""}
       <Card
         className={classes.root}
-        onClick={() => {
-          props.showTimeKeeper(props.details.appointment_number);
+        onClick={async () => {
+          await props.showTimeKeeper();
         }}
       >
         <div className={classes.details}>
-          <CardContent className={classes.content}>
-            <Typography component="h5" variant="h5">
-              {props.details.name}
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              {props.details.date.slice(0, 10)}
-            </Typography>
-          </CardContent>
+          <div className={classes.name}>Abhishek Kedia</div>
+          <div className={classes.date}>2021-05-25</div>
         </div>
         <div className={classes.icon}>
           <CardMedia className={classes.cover}>
-            <ScheduleIcon fontSize="inherit" />
+            2:30 PM
           </CardMedia>
         </div>
       </Card>
@@ -93,7 +94,7 @@ const mapStatetoProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  showTimeKeeper: (modal_id) => dispatch(showTimeKeeper(modal_id)),
+  showTimeKeeper: () => dispatch(showTimeKeeper()),
 });
 
 export default connect(mapStatetoProps, mapDispatchToProps)(MediaControlCard);

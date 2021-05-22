@@ -2,6 +2,7 @@ import { Button } from "@material-ui/core";
 import LineGraph from "../utils/line_chart";
 import React, { useEffect, useState } from "react";
 import Card from "./appointmentCard";
+import PatientCard from "./patientsCard";
 import { fetchAppointments } from "./apiCalls";
 import "./index.scss";
 import { connect } from "react-redux";
@@ -14,9 +15,10 @@ function Doctor(props) {
     const res = await fetchAppointments(props.id);
 
     res.map((appointment, index) => {
+      console.log(appointment)
       appointments.push(
         <div className="appointment-cards">
-          <Card details={appointment} />
+          <Card details={appointment} key={appointment.appointment_number}/>
         </div>
       );
     });
@@ -24,15 +26,9 @@ function Doctor(props) {
     setAppointments(appointments);
   }, []);
 
-  const showAppointmentCards = () => {};
-
   return (
     <div id="doctor-main">
       <div id="main-area">
-        <div id="home-button">
-          <h1 className="header">The Remote Doctor.</h1>
-          <Button className="home">Home</Button>
-        </div>
         <div id="row-1">
           <div className="hello-doctor">
             Welcome Back,
@@ -43,12 +39,21 @@ function Doctor(props) {
             <LineGraph />
           </div>
         </div>
-        <div id="row-2">
-          <div className="upcoming-patients">Your next patients</div>
+
+        <div id="upcoming-patients">
+          <div className="upcoming-patients-text">
+            Here are your upcoming patients...
+          </div>
+          <div className="patient-card">
+            <PatientCard />
+          </div>
         </div>
       </div>
+
+      <hr />
+
       <div id="schedule-patients">
-        <div className="schedule-header">Schedule your upcoming patients</div>
+        <div className="schedule-header">Schedule your patients</div>
         <div className="line">
           <hr />
         </div>

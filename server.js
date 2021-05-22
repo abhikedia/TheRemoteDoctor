@@ -119,3 +119,10 @@ app.get("/fetchAppointments/:id", function (req, res) {
     err ? res.send(err) : res.json(results);
   });
 });
+
+app.put("/updatePatientTime/:time/:id", function (req, res) {
+  const query = `UPDATE Appointments SET time = '${req.params.time}' where appointment_number = ${req.params.id}`;
+  connection.query(query, function (err, results) {
+    err ? res.send(err) : res.json(results);
+  });
+});

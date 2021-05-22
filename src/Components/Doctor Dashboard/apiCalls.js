@@ -10,3 +10,19 @@ export const fetchAppointments = async (id) => {
 
   return res;
 };
+
+export const updatePatientTime = (time, id) => {
+  const url = "http://localhost:4000/updatePatientTime/" + time + "/" + id;
+
+  fetch(url, {
+    method: "PUT", // or 'PUT'
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      console.log("Success");
+    })
+    .catch((error) => console.error("Error:", error));
+};
