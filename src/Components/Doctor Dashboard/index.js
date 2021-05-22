@@ -3,26 +3,40 @@ import LineGraph from "../utils/line_chart";
 import React, { useEffect, useState } from "react";
 import Card from "./appointmentCard";
 import PatientCard from "./patientsCard";
-import { fetchAppointments } from "./apiCalls";
+import { fetchAppointments, fetchScheduledAppointments } from "./apiCalls";
 import "./index.scss";
 import { connect } from "react-redux";
 
 function Doctor(props) {
   const [appointments, setAppointments] = useState([]);
+  const [scheduled, setScheduled] = useState([]);
 
   useEffect(async () => {
     let appointments = [];
+    let scheduled = [];
+
     const res = await fetchAppointments(props.id);
+    const app = await fetchScheduledAppointments(props.id);
 
     res.map((appointment, index) => {
-      console.log(appointment)
+      // console.log(appointment);
       appointments.push(
         <div className="appointment-cards">
-          <Card details={appointment} key={appointment.appointment_number}/>
+          <Card details={appointment} />
         </div>
       );
     });
 
+    app.map((appointment, index) => {
+      console.log(appointment);
+      scheduled.push(
+        <div className="patient-card">
+          <PatientCard details={appointment} />
+        </div>
+      );
+    });
+
+    setScheduled(scheduled);
     setAppointments(appointments);
   }, []);
 
@@ -44,9 +58,7 @@ function Doctor(props) {
           <div className="upcoming-patients-text">
             Here are your upcoming patients...
           </div>
-          <div className="patient-card">
-            <PatientCard />
-          </div>
+          {scheduled}
         </div>
       </div>
 

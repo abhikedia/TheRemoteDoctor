@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
-
 import Modal from "@material-ui/core/Modal";
-import ScheduleIcon from "@material-ui/icons/Schedule";
 import { showTimeKeeper } from "../../state/TimePicker/action";
 import { connect } from "react-redux";
 import TimeKeeper from "../TimeKeeper/index";
+import timeConvertor from '../utils/timeFormatter';
 import "./index.scss";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
   name: {
     width: "40%",
-    fontSize: "2em",
+    fontSize: "1.7em",
     paddingLeft: "2vw",
   },
   date: {
@@ -46,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cover: {
     alignSelf: "center",
-    fontSize: "1.5em",
+    fontSize: "1.3em",
   },
 }));
 
@@ -76,12 +73,12 @@ function MediaControlCard(props) {
         }}
       >
         <div className={classes.details}>
-          <div className={classes.name}>Abhishek Kedia</div>
-          <div className={classes.date}>2021-05-25</div>
+          <div className={classes.name}>{props.details.name}</div>
+          <div className={classes.date}>{props.details.date.slice(0,10)}</div>
         </div>
         <div className={classes.icon}>
           <CardMedia className={classes.cover}>
-            2:30 PM
+            {timeConvertor(props.details.time)}
           </CardMedia>
         </div>
       </Card>

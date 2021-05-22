@@ -11,9 +11,10 @@ function TimeSelector(props) {
       <TimeKeeper
         time={time}
         onChange={(newTime) => setTime(newTime.formatted24)}
-        onDoneClick={() => {
+        onDoneClick={async () => {
           props.parentCallBack(time, props.appointment);
-          props.hideTimeKeeer();
+          await props.hideTimeKeeer();
+          window.location.reload();
         }}
         switchToMinuteOnHourSelect
       />
