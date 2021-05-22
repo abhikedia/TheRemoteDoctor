@@ -1,16 +1,33 @@
 import { Button } from "@material-ui/core";
 import LineGraph from "../utils/line_chart";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./appointmentCard";
-
+import { fetchAppointments } from "./apiCalls";
 import "./index.scss";
 import { connect } from "react-redux";
 
-
 function Doctor(props) {
+  const [appointments, setAppointments] = useState([]);
+
+  useEffect(async () => {
+    let appointments = [];
+    const res = await fetchAppointments(props.id);
+
+    res.map((appointment, index) => {
+      appointments.push(
+        <div className="appointment-cards">
+          <Card details={appointment} />
+        </div>
+      );
+    });
+
+    setAppointments(appointments);
+  }, []);
+
+  const showAppointmentCards = () => {};
+
   return (
     <div id="doctor-main">
-
       <div id="main-area">
         <div id="home-button">
           <h1 className="header">The Remote Doctor.</h1>
@@ -35,9 +52,7 @@ function Doctor(props) {
         <div className="line">
           <hr />
         </div>
-        <div className="appointment-cards">
-          <Card />
-        </div>
+        {appointments}
       </div>
     </div>
   );
@@ -45,6 +60,7 @@ function Doctor(props) {
 
 const mapStatetoProps = (state) => ({
   name: state.doctorLogAction.name,
+  id: state.doctorLogAction.id,
   displayTimeKeeper: state.toggleTimeKeeper.displayTimeKeeper,
 });
 

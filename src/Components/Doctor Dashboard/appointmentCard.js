@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -52,6 +52,10 @@ function MediaControlCard(props) {
   const classes = useStyles();
   const theme = useTheme();
 
+  useEffect(() => {
+    console.log(props);
+  }, []);
+
   return (
     <div>
       {props.displayTimeSelector ? timeSelectorModal() : ""}
@@ -59,16 +63,15 @@ function MediaControlCard(props) {
         className={classes.root}
         onClick={async () => {
           await props.showTimeKeeper();
-          console.log(store.getState());
         }}
       >
         <div className={classes.details}>
           <CardContent className={classes.content}>
             <Typography component="h5" variant="h5">
-              Live From Space
+              {props.details.name}
             </Typography>
             <Typography variant="subtitle1" color="textSecondary">
-              Mac Miller
+              {props.details.date.slice(0, 10)}
             </Typography>
           </CardContent>
         </div>

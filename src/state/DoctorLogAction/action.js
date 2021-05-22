@@ -1,15 +1,13 @@
-import store from "../../store";
-
 export const doctorLogIn = (data) => {
-  store.dispatch({
+  return {
     type: "LogIn",
     payload: data,
-  });
+  };
 };
 
 export const doctorLogOut = (email) => {
-  store.dispatch({
+  return {
     type: "LogOut",
     payload: email,
-  });
+  };
 };

@@ -109,3 +109,13 @@ app.get("/getDoctors/:city/:dept/:hospital", function (req, res) {
     err ? res.send(err) : res.json(results);
   });
 });
+
+app.get("/fetchAppointments/:id", function (req, res) {
+  const query = `Select Appointments.appointment_number, Appointments.patient_id, Appointments.date, 
+      Appointments.notes, Patients.name from Appointments INNER JOIN Patients ON 
+      Appointments.patient_id=Patients.patientid where Appointments.time = '00:00:00' and doctor_id = '${req.params.id}'`;
+
+  connection.query(query, function (err, results) {
+    err ? res.send(err) : res.json(results);
+  });
+});
