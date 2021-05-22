@@ -4,6 +4,15 @@
   flex-direction: row;
   background-color: #a3bcb6;
 
+  .timer-modal {
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+    justify-self: center;
+    justify-items: center;
+    display: flex;
+  }
+
   #main-area {
     display: flex;
     flex-direction: row;
@@ -70,11 +79,31 @@
 
     .schedule-header {
       color: #3c403d;
-      font-size: 4vh;
-      position: relative;
-      top: 2vh;
+      font-size: 2.1em;
+      // position: relative;
+      margin-top: 2vh;
       font-family: "Architects Daughter", cursive;
       font-weight: bolder;
     }
+
+    .line {
+      margin-top: 1vh;
+    }
+
+    .appointment-cards {
+      padding: 1rem;
+    }
+
+    .appointment-cards:hover {
+      cursor: pointer;
+    }
   }
+}
+
+.timer-modal {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: relative;
+  left: 45% !important;
 }

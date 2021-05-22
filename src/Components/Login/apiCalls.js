@@ -32,19 +32,19 @@ export const doctorAction = (url, props, history) => {
     .then((response) => response.json())
     .then((response) => {
       if (!response.length) {
-        return 1;
+        return;
       }
+
       let data = {
         id: response[0].doctorid,
         email: response[0].email,
         name: response[0].name,
       };
       props.doctorLoginActionHandler(data);
-    })
-    .then(
+
       setTimeout(function () {
         history.push("/doctorDashboard");
-      }, 1000)
-    )
+      }, 1000);
+    })
     .catch((err) => console.log(err));
 };

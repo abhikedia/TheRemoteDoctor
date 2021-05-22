@@ -35,7 +35,7 @@ function PatientLogin(props) {
         ? setErrorMessage("Incorrect Email/Password or patient not registered!")
         : setErrorMessage("")
       : doctorAction(url, props, history)
-      ? setErrorMessage("Incorrect Email/Password or user doctor registered!")
+      ? setErrorMessage("Incorrect Email/Password or doctor not registered!")
       : setErrorMessage("");
   };
 
