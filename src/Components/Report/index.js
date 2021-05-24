@@ -1,22 +1,56 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./index.scss";
 import getDate from "../utils/getDate";
 import { connect } from "react-redux";
 import { Button, TextareaAutosize, TextField } from "@material-ui/core";
+import { closeModal } from "../../state/ReportModal/action";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 
 function Report(props) {
+  const [name, setName] = useState("");
+  const [dob, setDob] = useState("");
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
+
+  useEffect(() => {
+    const url = "http://localhost:4000/getPatientData/" + 1;
+    fetch(url)
+      .then((response) => response.json())
+      .then((response) => {
+        setName(response[0].name);
+        setHeight(response[0].height);
+        setWeight(response[0].weight);
+        setDob(response[0].dob);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const generateReport = async () => {
+    const input = document.getElementById("report");
+    await html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF({
+        format: [162.5, 162], //[vertical, horizontal]
+      });
+      pdf.addImage(imgData, "JPEG", 0, 0);
+      // pdf.save("download.pdf");
+    });
+    props.hideReportModal();
+  };
+
   return (
     <div id="report">
       <div id="patient-details">
         <div className="patient">
-          <span>Name: {props.patientname}</span>
+          <span>Name: {name}</span>
           <span className="date">Date: {getDate()}</span>
         </div>
         <div>
           <span>Age:</span>
           <span className="details">
-            <span>Height: {props.height}</span>
-            <span className="weight">Weight: {props.weight}</span>
+            <span>Height: {height} cms</span>
+            <span className="weight">Weight: {weight} kg</span>
           </span>
         </div>
         <div>Doctor: {props.doctorname}</div>
@@ -36,7 +70,7 @@ function Report(props) {
           color="secondary"
           variant="contained"
           className="book-button"
-          // onClick={() => notifyDoctor()}
+          onClick={() => generateReport()}
         >
           Create Report
         </Button>
@@ -46,11 +80,11 @@ function Report(props) {
 }
 
 const mapStatetoProps = (state) => ({
-  patientname: state.patientLogAction.name,
-  dob: state.patientLogAction.dob,
-  height: state.patientLogAction.height,
-  weight: state.patientLogAction.weight,
   doctorname: state.doctorLogAction.name,
 });
 
-export default connect(mapStatetoProps, null)(Report);
+const mapDispatchToProps = (dispatch) => ({
+  hideReportModal: () => dispatch(closeModal()),
+});
+
+export default connect(mapStatetoProps, mapDispatchToProps)(Report);

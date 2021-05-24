@@ -5,8 +5,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Modal from "@material-ui/core/Modal";
 import { showTimeKeeper } from "../../state/TimePicker/action";
 import { connect } from "react-redux";
-// import Report from "./reportGenerator";
-import TimeKeeper from "../TimeKeeper/index";
+import { OpenModal } from "../../state/ReportModal/action";
 import timeConvertor from "../utils/timeFormatter";
 import "./index.scss";
 
@@ -48,29 +47,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MediaControlCard(props) {
-  const [report, setReport] = useState(false);
+function MediaControlCard(props) {
   const classes = useStyles();
 
   useEffect(() => {
     console.log(props);
   }, []);
 
-  const reportCreatorModal = () => {
-    return (
-      <Modal
-        className="report-modal"
-        open={report}
-        onClose={() => setReport(false)}
-      >
-        {/* <Report /> */}
-      </Modal>
-    );
+  const setReport = () => {
+    props.showReportModal(props.details.patient_id);
   };
 
   return (
     <div>
-      {reportCreatorModal()}
       <Card
         className={classes.root}
         onClick={() => {
@@ -95,8 +84,8 @@ export default function MediaControlCard(props) {
 //   displayTimeSelector: state.toggleTimeKeeper.displayTimeKeeper,
 // });
 
-// const mapDispatchToProps = (dispatch) => ({
-//   showTimeKeeper: () => dispatch(showTimeKeeper()),
-// });
+const mapDispatchToProps = (dispatch) => ({
+  showReportModal: (id) => dispatch(OpenModal(id)),
+});
 
-// export default connect(mapStatetoProps, mapDispatchToProps)(MediaControlCard);
+export default connect(null, mapDispatchToProps)(MediaControlCard);

@@ -78,6 +78,13 @@ app.get("/checkPatientRegistration/:email/:password", function (req, res) {
   });
 });
 
+app.get("/getPatientData/:id", function (req, res) {
+  const query = `Select name, dob, height, weight from Patients where patientid = '${req.params.id}'`;
+  connection.query(query, function (err, results) {
+    err ? res.send(err) : res.json(results);
+  });
+});
+
 app.get("/checkDoctorRegistration/:email/:password", function (req, res) {
   const query = `Select name, email, doctorid from Doctors where email = '${req.params.email}' and password = '${req.params.password}'`;
   connection.query(query, function (err, results) {

@@ -33,6 +33,7 @@ export const fetchScheduledAppointments = (id) => {
   const res = fetch(url)
     .then((response) => response.json())
     .then((response) => {
+      // console.log(response)
       return response;
     })
     .catch((err) => console.log(err));

@@ -43,8 +43,8 @@ function Doctor(props) {
 
   const reportModal = () => {
     return (
-      <Modal id="report-modal" open={true}>
-        <Report />
+      <Modal id="report-modal" open={props.showModal}>
+        <Report id={props.patientid}/>
       </Modal>
     );
   };
@@ -89,6 +89,8 @@ const mapStatetoProps = (state) => ({
   name: state.doctorLogAction.name,
   id: state.doctorLogAction.id,
   displayTimeKeeper: state.toggleTimeKeeper.displayTimeKeeper,
+  showModal: state.toggleReportModal.modalopen,
+  patientid: state.toggleReportModal.id,
 });
 
 export default connect(mapStatetoProps, null)(Doctor);
