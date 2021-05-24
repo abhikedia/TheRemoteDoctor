@@ -1,0 +1,60 @@
+#report {
+  display: flex;
+  width: 30%;
+  height: 60vh;
+  border-style: solid;
+  border-color: black;
+  padding: 1em;
+  flex-direction: column;
+  background-color: whitesmoke;
+
+  #patient-details {
+    height: 18%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+
+    .patient {
+      display: flex;
+      width: 100%;
+    }
+
+    .details {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .weight {
+      margin-left: 1vw;
+    }
+
+    .date {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  .line {
+    width: 100%;
+    margin-top: 2vh !important;
+  }
+
+  #doctor-comments {
+    height: 80%;
+    display: flex;
+    margin-top: 2vh;
+
+    .text-box {
+      flex-grow: 1;
+      height: 90% !important;
+      // width: 100%;
+    }
+  }
+
+  #create-report {
+    display: flex;
+    justify-content: center;
+  }
+}

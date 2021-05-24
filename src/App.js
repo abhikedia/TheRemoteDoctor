@@ -8,6 +8,7 @@ import Records from "./Components/Records/index";
 import Graph from "./Components/utils/line_chart";
 import TrackAppointment from "./Components/TrackAppointment/index";
 import { Route, Switch } from "react-router-dom";
+import Report from './Components/Report/index'
 import store from "./store";
 import { Provider } from "react-redux";
 
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/graph" component={Graph} />
           <Route path="/doctorDashboard" component={doctorDashboard} />
           <Route path="/trackappointment" component={TrackAppointment} />
+          <Route path="/report" component={Report} />
         </Switch>
       </Provider>
     </main>
