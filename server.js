@@ -138,7 +138,6 @@ app.get("/fetchScheduledAppointments/:id", function (req, res) {
                   INNER JOIN Patients ON 
                   Appointments.patient_id = Patients.patientid 
                   where Appointments.date >= CURDATE() 
-                  and Appointments.time >= NOW()
                   and doctor_id = '${req.params.id}'`;
 
   connection.query(query, function (err, results) {

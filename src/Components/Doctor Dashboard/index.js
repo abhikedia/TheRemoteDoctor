@@ -13,6 +13,7 @@ function Doctor(props) {
   const [scheduled, setScheduled] = useState([]);
 
   useEffect(async () => {
+    console.log(props.id)
     let appointments = [];
     let scheduled = [];
 

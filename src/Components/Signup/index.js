@@ -215,6 +215,7 @@ export default function SignUp() {
                 <TextField
                   label="Password"
                   color="secondary"
+                  type="password"
                   required={true}
                   fullWidth={true}
                   variant="outlined"
@@ -227,6 +228,7 @@ export default function SignUp() {
                 <TextField
                   label="Confirm Password"
                   color="secondary"
+                  type="password"
                   required={true}
                   fullWidth={true}
                   variant="outlined"

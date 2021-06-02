@@ -7,6 +7,10 @@ import { closeModal } from "../../state/ReportModal/action";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
+const swarm = require("swarm-js").at("https://swarm-gateways.net");
+var path = require("path");
+var file = "/home/abkedia/Downloads/report.pdf";
+
 function Report(props) {
   const [name, setName] = useState("");
   const [dob, setDob] = useState("");
@@ -33,10 +37,15 @@ function Report(props) {
       const pdf = new jsPDF({
         format: [162.5, 162], //[vertical, horizontal]
       });
-      pdf.addImage(imgData, "JPEG", 0, 0);
-      // pdf.save("download.pdf");
+      pdf.addImage(imgData, "JPEG", 0, 0); //imgData contains the image of the report
+
+      swarm
+        .upload(imgData)
+        .then((hash) => {
+          console.log("Uploaded file. Address:", hash);
+        })
+        .then(() => props.hideReportModal());
     });
-    props.hideReportModal();
   };
 
   return (

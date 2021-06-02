@@ -103,6 +103,7 @@ function PatientLogin(props) {
                     id="input-with-icon-grid"
                     required
                     label="Password"
+                    type="password"
                     className="email"
                     onChange={(event) => setPassword(event.target.value)}
                   />
