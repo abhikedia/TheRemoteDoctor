@@ -23,6 +23,7 @@ CREATE TABLE `Appointments` (
 	`time` TIME,
 	`doctor_id` INT NOT NULL,
 	`notes` varchar(500),
+	`visited` varchar(100),
 	PRIMARY KEY (`appointment_number`)
 );
 

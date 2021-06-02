@@ -13,7 +13,8 @@ function Doctor(props) {
   const [scheduled, setScheduled] = useState([]);
 
   useEffect(async () => {
-    console.log(props.id)
+    console.log('I was called')
+
     let appointments = [];
     let scheduled = [];
 
@@ -40,12 +41,12 @@ function Doctor(props) {
 
     setScheduled(scheduled);
     setAppointments(appointments);
-  }, []);
+  }, [props.updateAppointments]);
 
   const reportModal = () => {
     return (
       <Modal id="report-modal" open={props.showModal}>
-        <Report id={props.patientid}/>
+        <Report id={props.patientid} />
       </Modal>
     );
   };
@@ -92,6 +93,7 @@ const mapStatetoProps = (state) => ({
   displayTimeKeeper: state.toggleTimeKeeper.displayTimeKeeper,
   showModal: state.toggleReportModal.modalopen,
   patientid: state.toggleReportModal.id,
+  updateAppointments: state.update.updateAppointments,
 });
 
 export default connect(mapStatetoProps, null)(Doctor);

@@ -55,7 +55,10 @@ function MediaControlCard(props) {
   }, []);
 
   const setReport = () => {
-    props.showReportModal(props.details.patient_id);
+    props.showReportModal(
+      props.details.patient_id,
+      props.details.appointment_number
+    );
   };
 
   return (
@@ -85,7 +88,7 @@ function MediaControlCard(props) {
 // });
 
 const mapDispatchToProps = (dispatch) => ({
-  showReportModal: (id) => dispatch(OpenModal(id)),
+  showReportModal: (id, appointment) => dispatch(OpenModal(id, appointment)),
 });
 
 export default connect(null, mapDispatchToProps)(MediaControlCard);

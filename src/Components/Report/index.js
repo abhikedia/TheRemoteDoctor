@@ -6,6 +6,7 @@ import { Button, TextareaAutosize, TextField } from "@material-ui/core";
 import { closeModal } from "../../state/ReportModal/action";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
+import { updateAppointments } from "../../state/Updates/action";
 
 const swarm = require("swarm-js").at("https://swarm-gateways.net");
 var path = require("path");
@@ -30,6 +31,23 @@ function Report(props) {
       .catch((err) => console.log(err));
   }, []);
 
+  const updateHash = (hash) => {
+    const url =
+      "http://localhost:4000/updateHash/" + props.appointment + "/" + hash;
+
+    fetch(url, {
+      method: "PUT", // or 'PUT'
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        console.log("Success");
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+
   const generateReport = async () => {
     const input = document.getElementById("report");
     await html2canvas(input).then((canvas) => {
@@ -43,7 +61,9 @@ function Report(props) {
         .upload(imgData)
         .then((hash) => {
           console.log("Uploaded file. Address:", hash);
+          updateHash(hash);
         })
+        .then(() => props.updateAppointments())
         .then(() => props.hideReportModal());
     });
   };
@@ -90,10 +110,12 @@ function Report(props) {
 
 const mapStatetoProps = (state) => ({
   doctorname: state.doctorLogAction.name,
+  appointment: state.toggleReportModal.an,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   hideReportModal: () => dispatch(closeModal()),
+  updateAppointments: () => dispatch(updateAppointments()),
 });
 
 export default connect(mapStatetoProps, mapDispatchToProps)(Report);

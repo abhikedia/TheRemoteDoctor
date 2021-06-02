@@ -1,7 +1,7 @@
-export const OpenModal = (id) => {
+export const OpenModal = (id, appointment) => {
   return {
     type: "OpenModal",
-    payload: id,
+    payload: { id, appointment },
   };
 };
 

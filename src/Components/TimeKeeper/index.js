@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import TimeKeeper from "react-timekeeper";
 import { hideTimeKeeper } from "../../state/TimePicker/action";
+import { updateAppointments } from "../../state/Updates/action";
 
 function TimeSelector(props) {
   const [time, setTime] = useState("11:11");
@@ -13,8 +14,8 @@ function TimeSelector(props) {
         onChange={(newTime) => setTime(newTime.formatted24)}
         onDoneClick={async () => {
           props.parentCallBack(time, props.appointment);
-          await props.hideTimeKeeer();
-          window.location.reload();
+          props.hideTimeKeeer();
+          props.updateAppointments();
         }}
         switchToMinuteOnHourSelect
       />
@@ -29,6 +30,7 @@ const mapStatetoProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   hideTimeKeeer: () => dispatch(hideTimeKeeper()),
+  updateAppointments: () => dispatch(updateAppointments()),
 });
 
 export default connect(mapStatetoProps, mapDispatchToProps)(TimeSelector);

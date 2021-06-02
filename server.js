@@ -135,9 +135,11 @@ app.get("/fetchAppointments/:id", function (req, res) {
 app.get("/fetchScheduledAppointments/:id", function (req, res) {
   const query = `Select Appointments.appointment_number, Appointments.patient_id, Appointments.date, Patients.name, Appointments.time
                   from Appointments 
-                  INNER JOIN Patients ON 
+                  INNER JOIN Patients ON
                   Appointments.patient_id = Patients.patientid 
                   where Appointments.date >= CURDATE() 
+                  and visited IS NULL
+                  and time != '00:00:00'
                   and doctor_id = '${req.params.id}'`;
 
   connection.query(query, function (err, results) {
@@ -147,6 +149,13 @@ app.get("/fetchScheduledAppointments/:id", function (req, res) {
 
 app.put("/updatePatientTime/:time/:id", function (req, res) {
   const query = `UPDATE Appointments SET time = '${req.params.time}' where appointment_number = ${req.params.id}`;
+  connection.query(query, function (err, results) {
+    err ? res.send(err) : res.json(results);
+  });
+});
+
+app.put("/updateHash/:appointment/:hash", function (req, res) {
+  const query = `UPDATE Appointments SET visited = '${req.params.hash}' where appointment_number = ${req.params.appointment}`;
   connection.query(query, function (err, results) {
     err ? res.send(err) : res.json(results);
   });
