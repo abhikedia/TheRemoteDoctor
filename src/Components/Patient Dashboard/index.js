@@ -10,6 +10,7 @@ import Modal from "@material-ui/core/Modal";
 import Appointment from "../Appointment/index";
 import { connect } from "react-redux";
 import HistoryIcon from "@material-ui/icons/History";
+import Records from "../Records/index";
 import "./index.scss";
 import store from "../../store";
 
@@ -130,20 +131,15 @@ function Dashboard(props) {
             </div>
           </div>
         </div>
-        <div className="dashboard-chart">s</div>
+        <div className="">{<Records />}</div>
       </div>
     );
-  };
-
-  const RightPane = () => {
-    return <div id="dashboard-sidepane-right">pp</div>;
   };
 
   return (
     <div id="dashboard-main">
       {LeftPane()}
       {MainPane()}
-      {RightPane()}
     </div>
   );
 }

@@ -160,3 +160,25 @@ app.put("/updateHash/:appointment/:hash", function (req, res) {
     err ? res.send(err) : res.json(results);
   });
 });
+
+app.get("/getTotalDoctors/", function (req, res) {
+  const query = `Select COUNT(*) from Doctors`;
+  connection.query(query, function (err, results) {
+    err ? res.send(err) : res.json(results);
+  });
+});
+
+app.get("/getTotalAppointments/", function (req, res) {
+  const query = `Select COUNT(*) from Appointments`;
+  connection.query(query, function (err, results) {
+    err ? res.send(err) : res.json(results);
+  });
+});
+
+app.get("/getAppointmentsToday/", function (req, res) {
+  const query = `Select COUNT(*) from Appointments 
+                  where date = CURDATE()`;
+  connection.query(query, function (err, results) {
+    err ? res.send(err) : res.json(results);
+  });
+});

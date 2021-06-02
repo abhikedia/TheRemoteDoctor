@@ -1,21 +1,21 @@
-.records-header {
-    display: flex;
-    margin-top: 5vh;
-    justify-content: center;
-}
+#records-main {
+  position: relative;
+  top: 8vh;
 
-.records-card {
+  .records-card {
     display: flex;
     margin-top: 3vh;
     flex-direction: row;
-    margin-left: 5%;
-}
+    width: 50vw;
+    margin-left: 10%;
+  }
 
-.records-graph {
+  .records-graph {
     display: flex;
     flex-direction: row;
     margin-top: 3vh;
     gap: 5vw;
     justify-content: center;
     padding-bottom: 5vh;
+  }
 }
