@@ -1,9 +1,0 @@
-{
-  "presets": ["@babel/preset-react"],
-  "plugins": [
-    "@babel/syntax-dynamic-import",
-    "transform-runtime",
-    ["@babel/plugin-proposal-class-properties", { "loose": true }],
-    "@babel/transform-async-to-generator"
-  ]
-}

@@ -4,14 +4,18 @@ var webpack = require("webpack");
 module.exports = {
   entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    // path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
-    publicPath: "/dist",
+    // publicPath: "/dist",
   },
   resolve: {
     fallback: {
       crypto: false,
     },
+  },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: path.resolve(__dirname, "./src"),
   },
   module: {
     rules: [
@@ -20,10 +24,6 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-          query: {
-            presets: ['@babel/preset-react', '@babel/preset-env'],
-            plugins: ['@babel/proposal-class-properties']
-          },
           options: {
             presets: ["@babel/preset-env"],
           },
@@ -43,6 +43,5 @@ module.exports = {
       },
     ],
   },
-  //   plugins: [new webpack.HtmlWebpackPlugin({ template: './index.html' })],
   mode: "development",
 };
