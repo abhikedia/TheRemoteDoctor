@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, Button } from "@material-ui/core";
 import ApartmentIcon from "@material-ui/icons/Apartment";
 import AllInclusiveIcon from "@material-ui/icons/AllInclusive";
@@ -10,13 +10,34 @@ import Modal from "@material-ui/core/Modal";
 import Appointment from "../Appointment/index";
 import { connect } from "react-redux";
 import HistoryIcon from "@material-ui/icons/History";
+import Reports from "./reports";
 import Records from "../Records/index";
+import TrackAppointment from "../TrackAppointment/index";
 import "./index.scss";
-import store from "../../store";
 
 function Dashboard(props) {
   const [newAppointment, setNewAppointment] = useState(false);
   const [trackAppointment, setTrackAppointment] = useState(false);
+  const [reports, showReports] = useState(false);
+  const [finalReports, setFinalReports] = useState([]);
+
+  useEffect(() => {
+    const rep = [];
+    const url = "http://localhost:4000/getPatientReports/" + 4;
+    fetch(url)
+      .then((res) => res.json())
+      .then((res) => {
+        res.map((appointment, index) => {
+          rep.push(
+            <div className="patient-card">
+              <Reports details={appointment} />
+            </div>
+          );
+        });
+      });
+
+    setFinalReports(rep);
+  }, []);
 
   function newAppointmentModal() {
     return (
@@ -37,7 +58,19 @@ function Dashboard(props) {
         open={trackAppointment}
         onClose={() => setTrackAppointment(false)}
       >
-        <Appointment />
+        <TrackAppointment patientid={props.patientid} />
+      </Modal>
+    );
+  }
+
+  function displayReports() {
+    return (
+      <Modal
+        className="appointment-modal"
+        open={reports}
+        onClose={() => showReports(false)}
+      >
+        {/* {finalReports} */}
       </Modal>
     );
   }
@@ -94,7 +127,12 @@ function Dashboard(props) {
               <TrackChangesIcon />
             </Grid>
             <Grid item>
-              <Button className="dashboard-buttons">Reports</Button>
+              <Button
+                className="dashboard-buttons"
+                onClick={() => showReports(true)}
+              >
+                Reports
+              </Button>
             </Grid>
           </Grid>
           <Grid container alignItems="center">
@@ -124,6 +162,8 @@ function Dashboard(props) {
       <div id="dashboard-mainportal">
         {newAppointmentModal()}
         {trackAppointmentModal()}
+        {displayReports()}
+
         <div className="dashboard-user">
           <div id="dashboard-user-profile">
             <div className="dashboard-avatar">
@@ -166,6 +206,7 @@ function Dashboard(props) {
 }
 
 const mapStatetoProps = (state) => ({
+  patientid: state.patientLogAction.id,
   name: state.patientLogAction.name,
   gender: state.patientLogAction.gender,
   avatar: state.patientLogAction.avatar,
@@ -174,7 +215,5 @@ const mapStatetoProps = (state) => ({
   weight: state.patientLogAction.weight,
   blood: state.patientLogAction.blood,
 });
-
-console.log(store.getState());
 
 export default connect(mapStatetoProps, null)(Dashboard);

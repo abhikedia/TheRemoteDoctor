@@ -1,5 +1,15 @@
 #track-appointment {
+  display: flex;
+  background-color: whitesmoke;
+  height: 20%;
+  width: 30%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4vh;
+
+  .track {
     display: flex;
-    flex-direction: column;
-    justify-items: center;
+    gap: 2vw;
+  }
 }

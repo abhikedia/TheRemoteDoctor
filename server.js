@@ -182,3 +182,24 @@ app.get("/getAppointmentsToday/", function (req, res) {
     err ? res.send(err) : res.json(results);
   });
 });
+
+app.get("/getAppointmentsToday/", function (req, res) {
+  const query = `Select COUNT(*) from Appointments 
+                  where date = CURDATE()`;
+  connection.query(query, function (err, results) {
+    err ? res.send(err) : res.json(results);
+  });
+});
+
+app.get("/getPatientReports/:patientid", function (req, res) {
+  const query = `Select Appointments.date, Appointments.visited, Doctors.name
+                  from Appointments
+                  INNER JOIN Doctors ON
+                  Appointments.doctor_id = Doctors.doctorid 
+                  where Appointments.visited is NOT NULL
+                  and Appointments.patient_id = ${req.params.patientid}`;
+
+  connection.query(query, function (err, results) {
+    err ? res.send(err) : res.json(results);
+  });
+});
