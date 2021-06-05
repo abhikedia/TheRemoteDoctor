@@ -5,39 +5,19 @@ import AllInclusiveIcon from "@material-ui/icons/AllInclusive";
 import Grid from "@material-ui/core/Grid";
 import AssessmentIcon from "@material-ui/icons/Assessment";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import TrackChangesIcon from "@material-ui/icons/TrackChanges";
 import Modal from "@material-ui/core/Modal";
 import Appointment from "../Appointment/index";
 import { connect } from "react-redux";
 import HistoryIcon from "@material-ui/icons/History";
-import Reports from "./reports";
 import Records from "../Records/index";
 import TrackAppointment from "../TrackAppointment/index";
+import History from "./history";
 import "./index.scss";
 
 function Dashboard(props) {
   const [newAppointment, setNewAppointment] = useState(false);
   const [trackAppointment, setTrackAppointment] = useState(false);
-  const [reports, showReports] = useState(false);
-  const [finalReports, setFinalReports] = useState([]);
-
-  useEffect(() => {
-    const rep = [];
-    const url = "http://localhost:4000/getPatientReports/" + 4;
-    fetch(url)
-      .then((res) => res.json())
-      .then((res) => {
-        res.map((appointment, index) => {
-          rep.push(
-            <div className="patient-card">
-              <Reports details={appointment} />
-            </div>
-          );
-        });
-      });
-
-    setFinalReports(rep);
-  }, []);
+  const [history, showHistory] = useState(false);
 
   function newAppointmentModal() {
     return (
@@ -63,14 +43,14 @@ function Dashboard(props) {
     );
   }
 
-  function displayReports() {
+  function displayHistory() {
     return (
       <Modal
         className="appointment-modal"
-        open={reports}
-        onClose={() => showReports(false)}
+        open={history}
+        onClose={() => showHistory(false)}
       >
-        {/* {finalReports} */}
+        <History patientid={props.patientid} />
       </Modal>
     );
   }
@@ -124,23 +104,17 @@ function Dashboard(props) {
           </Grid>
           <Grid container alignItems="center">
             <Grid item>
-              <TrackChangesIcon />
+              <HistoryIcon />
             </Grid>
             <Grid item>
               <Button
                 className="dashboard-buttons"
-                onClick={() => showReports(true)}
+                onClick={() => {
+                  showHistory(true);
+                }}
               >
-                Reports
+                History
               </Button>
-            </Grid>
-          </Grid>
-          <Grid container alignItems="center">
-            <Grid item>
-              <HistoryIcon />
-            </Grid>
-            <Grid item>
-              <Button className="dashboard-buttons">History</Button>
             </Grid>
           </Grid>
         </div>
@@ -162,7 +136,7 @@ function Dashboard(props) {
       <div id="dashboard-mainportal">
         {newAppointmentModal()}
         {trackAppointmentModal()}
-        {displayReports()}
+        {displayHistory()}
 
         <div className="dashboard-user">
           <div id="dashboard-user-profile">

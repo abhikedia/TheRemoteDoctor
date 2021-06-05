@@ -137,3 +137,16 @@
   align-items: center;
   justify-content: center;
 }
+
+#history {
+  background-color: whitesmoke;
+  width: 40%;
+  height: 30%;
+
+  .history-text {
+    font-size: 2rem;
+    padding: 0.5em;
+    font-family: "Architects Daughter", cursive;
+    font-weight: bolder;
+  }
+}
