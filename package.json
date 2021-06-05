@@ -1,8 +1,10 @@
 {
   "name": "theremotedoctor",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "dependencies": {
+    "@babel/runtime": "^7.14.0",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.58",
@@ -32,28 +34,31 @@
     "swarm-js": "^0.1.40",
     "web-vitals": "^1.1.1"
   },
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.4",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "file-loader": "^6.2.0",
+    "sass": "^1.34.1",
+    "sass-loader": "^12.0.0",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
+  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "webpack serve"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhikedia/TheRemoteDoctor.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abhikedia/TheRemoteDoctor/issues"
+  },
+  "homepage": "https://github.com/abhikedia/TheRemoteDoctor#readme"
 }

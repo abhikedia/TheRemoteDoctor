@@ -9,7 +9,7 @@ import { jsPDF } from "jspdf";
 import { updateAppointments } from "../../state/Updates/action";
 
 const swarm = require("swarm-js").at("https://swarm-gateways.net");
-var path = require("path");
+// var path = require("path");
 var file = "/home/abkedia/Downloads/report.pdf";
 
 function Report(props) {
