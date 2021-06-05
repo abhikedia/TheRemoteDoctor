@@ -138,8 +138,8 @@ app.get("/fetchScheduledAppointments/:id", function (req, res) {
                   INNER JOIN Patients ON
                   Appointments.patient_id = Patients.patientid 
                   where Appointments.date >= CURDATE() 
-                  and visited IS NULL
                   and time != '00:00:00'
+                  and visited is NULL
                   and doctor_id = '${req.params.id}'`;
 
   connection.query(query, function (err, results) {

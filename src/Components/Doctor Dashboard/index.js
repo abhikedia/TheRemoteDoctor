@@ -1,4 +1,4 @@
-import { Button, Modal } from "@material-ui/core";
+import { Button, Modal, TextField } from "@material-ui/core";
 import LineGraph from "../utils/line_chart";
 import React, { useEffect, useState } from "react";
 import Card from "./appointmentCard";
@@ -7,13 +7,14 @@ import { fetchAppointments, fetchScheduledAppointments } from "./apiCalls";
 import "./index.scss";
 import { connect } from "react-redux";
 import Report from "../Report/index";
+import Records from "../Records/index";
 
 function Doctor(props) {
   const [appointments, setAppointments] = useState([]);
   const [scheduled, setScheduled] = useState([]);
 
   useEffect(async () => {
-    console.log('I was called')
+    console.log("I was called");
 
     let appointments = [];
     let scheduled = [];
@@ -66,11 +67,32 @@ function Doctor(props) {
           </div>
         </div>
 
-        <div id="upcoming-patients">
-          <div className="upcoming-patients-text">
-            Here are your upcoming patients...
+        <div id="lower-panel">
+          <div id="upcoming-patients">
+            <div className="upcoming-patients-text">
+              Here are your upcoming patients...
+            </div>
+            {scheduled}
           </div>
-          {scheduled}
+          <hr />
+          <div id="open-record">
+            <div className="check-record">Check your patient's record</div>
+            <div className="search">
+              <span>
+                <TextField placeholder="Appointment Number" />
+              </span>
+              <span>
+                <Button
+                  color="secondary"
+                  variant="contained"
+                  // className="book-button"
+                  // onClick={() => findAppointment()}
+                >
+                  Find
+                </Button>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 

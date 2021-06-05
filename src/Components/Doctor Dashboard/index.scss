@@ -51,25 +51,49 @@
       }
     }
 
-    #upcoming-patients {
+    #lower-panel {
+      display: flex;
+      flex-direction: row;
       height: 50%;
       background-color: white;
 
-      .upcoming-patients-text {
-        font-size: 2rem;
-        padding: 0.5em;
-        font-family: "Architects Daughter", cursive;
-        font-weight: bolder;
+      #upcoming-patients {
+        width: 80%;
+
+        .upcoming-patients-text {
+          font-size: 2rem;
+          padding: 0.5em;
+          font-family: "Architects Daughter", cursive;
+          font-weight: bolder;
+        }
+
+        .patient-card {
+          padding: 1em;
+          padding-left: 6vw;
+          padding-right: 6vw;
+        }
+
+        .patient-card:hover {
+          cursor: pointer;
+        }
       }
 
-      .patient-card {
-        padding: 1em;
-        padding-left: 6vw;
-        padding-right: 6vw;
-      }
+      #open-record {
+        .check-record {
+          font-size: 2rem;
+          padding: 0.5em;
+          font-family: "Architects Daughter", cursive;
+          font-weight: bolder;
+          margin-right: 8vw;
+        }
 
-      .patient-card:hover {
-        cursor: pointer;
+        .search {
+          position: relative;
+          left: 3vw;
+          top: 5vh;
+          display: flex;
+          gap: 2vw;
+        }
       }
     }
   }

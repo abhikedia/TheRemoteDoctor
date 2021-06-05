@@ -16,8 +16,9 @@ import store from "../../store";
 
 function Dashboard(props) {
   const [newAppointment, setNewAppointment] = useState(false);
+  const [trackAppointment, setTrackAppointment] = useState(false);
 
-  const newAppointmentModal = () => {
+  function newAppointmentModal() {
     return (
       <Modal
         className="appointment-modal"
@@ -27,7 +28,19 @@ function Dashboard(props) {
         <Appointment />
       </Modal>
     );
-  };
+  }
+
+  function trackAppointmentModal() {
+    return (
+      <Modal
+        className="appointment-modal"
+        open={trackAppointment}
+        onClose={() => setTrackAppointment(false)}
+      >
+        <Appointment />
+      </Modal>
+    );
+  }
 
   const LeftPane = () => {
     return (
@@ -66,7 +79,14 @@ function Dashboard(props) {
               <AssessmentIcon />
             </Grid>
             <Grid item>
-              <Button className="dashboard-buttons">Track Appointment</Button>
+              <Button
+                className="dashboard-buttons"
+                onClick={() => {
+                  setTrackAppointment(true);
+                }}
+              >
+                Track Appointment
+              </Button>
             </Grid>
           </Grid>
           <Grid container alignItems="center">
@@ -103,6 +123,7 @@ function Dashboard(props) {
     return (
       <div id="dashboard-mainportal">
         {newAppointmentModal()}
+        {trackAppointmentModal()}
         <div className="dashboard-user">
           <div id="dashboard-user-profile">
             <div className="dashboard-avatar">
@@ -131,7 +152,7 @@ function Dashboard(props) {
             </div>
           </div>
         </div>
-        <div className="">{<Records />}</div>
+        <div className="dashboard-records">{<Records />}</div>
       </div>
     );
   };

@@ -58,6 +58,10 @@
     height: 100%;
     width: 63%;
 
+    .dashboard-records {
+      margin-right: 40%;
+    }
+
     .dashboard-user {
       display: flex;
       flex-direction: row;
@@ -116,17 +120,6 @@
       .data-ans {
         color: #39603d;
       }
-    }
-
-    .dashboard-chart {
-      border-radius: 3vh;
-      position: relative;
-      top: 5vh;
-      background-color: #ffffff;
-      margin-left: 4vh;
-      margin-bottom: 5vh;
-      margin-right: 4vh;
-      height: 40%;
     }
   }
 

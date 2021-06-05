@@ -19,12 +19,12 @@ const useStyles = makeStyles((theme) => ({
   details: {
     display: "flex",
     flexDirection: "row",
-    width: "80%",
+    width: "100%",
     alignSelf: "center",
   },
   name: {
-    width: "40%",
-    fontSize: "1.7em",
+    width: "100%",
+    fontSize: "1.5em",
     paddingLeft: "2vw",
   },
   date: {
