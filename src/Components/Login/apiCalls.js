@@ -16,6 +16,7 @@ export const patientAction = (url, props, history) => {
         blood: response[0].blood,
         height: response[0].height,
         weight: response[0].weight,
+        account: response[0].weight,
       };
       props.logInActionHandler(data);
     })

@@ -16,9 +16,10 @@ function Report(props) {
   const [dob, setDob] = useState("");
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
+  const [patientAccount, setAccount] = useState("");
 
   useEffect(() => {
-    const url = "http://localhost:4000/getPatientData/" + 1;
+    const url = "http://localhost:4000/getPatientData/" + props.id;
     fetch(url)
       .then((response) => response.json())
       .then((response) => {
@@ -26,6 +27,7 @@ function Report(props) {
         setHeight(response[0].height);
         setWeight(response[0].weight);
         setDob(response[0].dob);
+        setAccount(response[0].account);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -51,11 +53,7 @@ function Report(props) {
     const account = await getAccount();
     contract().then((res) => {
       res.methods
-        .addReport(
-          props.appointment,
-          "0xc215425697f4C02fA63e194F6C6FcddFD114ca2E",
-          "0x".concat(hash)
-        )
+        .addReport(props.appointment, patientAccount, "0x".concat(hash))
         .send({ from: account })
         .on("transactionHash", function (hash) {
           console.log(hash);
@@ -76,8 +74,8 @@ function Report(props) {
         .upload(imgData)
         .then((hash) => {
           console.log("Uploaded file. Address:", hash);
-          updateHash(hash);
           updateBlockchain(hash);
+          updateHash(hash);
         })
         .then(() => props.updateAppointments())
         .then(() => props.hideReportModal());

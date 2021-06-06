@@ -9,6 +9,7 @@ const initialState = {
   height: "",
   weight: "",
   blood: "",
+  account: "",
 };
 
 export default function reducer(state = initialState, action) {
@@ -25,6 +26,7 @@ export default function reducer(state = initialState, action) {
       state.weight = data.weight;
       state.height = data.height;
       state.blood = data.blood;
+      state.account = data.account;
       break;
 
     case "LogOut":
