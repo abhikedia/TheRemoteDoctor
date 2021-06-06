@@ -7,6 +7,7 @@ import { closeModal } from "../../state/ReportModal/action";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import { updateAppointments } from "../../state/Updates/action";
+import Web3 from 'web3';
 
 const swarm = require("swarm-js").at("https://swarm-gateways.net");
 var path = require("path");
@@ -17,6 +18,12 @@ function Report(props) {
   const [dob, setDob] = useState("");
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
+
+  useEffect(async () => {
+    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+    const network = await web3.eth.net.getNetworkType();
+    console.log(network)
+  },[])
 
   useEffect(() => {
     const url = "http://localhost:4000/getPatientData/" + 1;
