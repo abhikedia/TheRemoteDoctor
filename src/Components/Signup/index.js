@@ -33,7 +33,7 @@ export default function SignUp() {
     })();
   }, [count]);
 
-  const signUpButton = () => {
+  const signUpButton = async () => {
     if (
       name === "" ||
       dob === "" ||
@@ -52,6 +52,12 @@ export default function SignUp() {
       setErrorMessage("Passwords Mismatch!");
       return;
     }
+
+    const accounts = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
+    const account = accounts[0];
+
     var url = "http://localhost:4000/addPatient";
     try {
       fetch(url, {
@@ -69,6 +75,7 @@ export default function SignUp() {
           height: height,
           weight: weight,
           blood: blood,
+          account: account,
         }), // data can be `string` or {object}!
         headers: {
           "Content-Type": "application/json",
@@ -79,6 +86,7 @@ export default function SignUp() {
           console.log("Success");
           setCount(count + 1);
         })
+        .then(() => window.location.replace("http://localhost:3000"))
         .catch((error) => console.error("Error:", error));
     } catch (err) {
       alert("Try Again!");

@@ -13,6 +13,7 @@ CREATE TABLE `Patients` (
 	`height` INT,
 	`weight` INT,
 	`blood` varchar(3),
+	`account` varchar(255) 	NOT NULL
 	PRIMARY KEY (`patientid`)
 );
 

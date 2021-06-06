@@ -31,24 +31,31 @@ function Report(props) {
       .catch((err) => console.log(err));
   }, []);
 
-  const updateHash = (hash) => {
+  const updateHash = async (hash) => {
     const url =
-      "http://localhost:4000/updateHash/" + props.appointment + "/" + hash;
+      // "http://localhost:4000/updateHash/" + props.appointment + "/" + hash;
 
-    fetch(url, {
-      method: "PUT", // or 'PUT'
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        console.log("Success");
+      fetch(url, {
+        method: "PUT", // or 'PUT'
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-      .catch((error) => console.error("Error:", error));
+        .then((response) => {
+          console.log("Success");
+        })
+        .catch((error) => console.error("Error:", error));
   };
 
+  const updateBlockchain = (account) => {};
+
   const generateReport = async () => {
+    const accounts = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
+    const account = accounts[0];
+
     const input = document.getElementById("report");
     await html2canvas(input).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
@@ -63,6 +70,7 @@ function Report(props) {
           console.log("Uploaded file. Address:", hash);
           updateHash(hash);
         })
+        .then(() => updateBlockchain(account))
         .then(() => props.updateAppointments())
         .then(() => props.hideReportModal());
     });
@@ -72,7 +80,7 @@ function Report(props) {
     <div id="report">
       <div id="patient-details">
         <div className="patient">
-          <span>Name: {name}</span>
+          <span>Patient's Name: {name}</span>
           <span className="date">Date: {getDate()}</span>
         </div>
         <div>
