@@ -7,14 +7,20 @@ import { fetchAppointments, fetchScheduledAppointments } from "./apiCalls";
 import "./index.scss";
 import { connect } from "react-redux";
 import Report from "../Report/index";
-import Records from "../Records/index";
+import Image from "./Image";
+import { loadWeb3, contract, getAccount } from "../utils/web3";
+
+const swarm = require("swarm-js").at("http://swarm-gateways.net");
 
 function Doctor(props) {
   const [appointments, setAppointments] = useState([]);
   const [scheduled, setScheduled] = useState([]);
+  const [prevAppointmentNumber, setNumber] = useState(0);
+  const [imageModal, setImageModal] = useState(false);
+  const [image, setImage] = useState([]);
 
   useEffect(async () => {
-    console.log("I was called");
+    loadWeb3();
 
     let appointments = [];
     let scheduled = [];
@@ -52,9 +58,36 @@ function Doctor(props) {
     );
   };
 
+  const previousReportModal = () => {
+    return (
+      <Modal
+        id="report-modal"
+        open={imageModal}
+        onClose={() => setImageModal(false)}
+      >
+        <Image image={image} />
+      </Modal>
+    );
+  };
+
+  const openReport = async () => {
+    const account = await getAccount();
+    contract().then(async (res) => {
+      const hash = await res.methods
+        .getHash(prevAppointmentNumber)
+        .call({ from: account });
+
+      swarm.download(hash.slice(2)).then((array) => {
+        setImage(swarm.toString(array));
+        setImageModal(true);
+      });
+    });
+  };
+
   return (
     <div id="doctor-main">
       {reportModal()}
+      {previousReportModal()}
       <div id="main-area">
         <div id="row-1">
           <div className="hello-doctor">
@@ -79,14 +112,16 @@ function Doctor(props) {
             <div className="check-record">Check your patient's record</div>
             <div className="search">
               <span>
-                <TextField placeholder="Appointment Number" />
+                <TextField
+                  placeholder="Appointment Number"
+                  onChange={(event) => setNumber(event.target.value)}
+                />
               </span>
               <span>
                 <Button
                   color="secondary"
                   variant="contained"
-                  // className="book-button"
-                  // onClick={() => findAppointment()}
+                  onClick={() => openReport()}
                 >
                   Find
                 </Button>

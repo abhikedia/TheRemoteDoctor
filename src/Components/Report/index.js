@@ -7,19 +7,19 @@ import { closeModal } from "../../state/ReportModal/action";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import { updateAppointments } from "../../state/Updates/action";
+import { contract, getAccount } from "../utils/web3";
 
 const swarm = require("swarm-js").at("https://swarm-gateways.net");
-var path = require("path");
-var file = "/home/abkedia/Downloads/report.pdf";
 
 function Report(props) {
   const [name, setName] = useState("");
   const [dob, setDob] = useState("");
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
+  const [patientAccount, setAccount] = useState("");
 
   useEffect(() => {
-    const url = "http://localhost:4000/getPatientData/" + 1;
+    const url = "http://localhost:4000/getPatientData/" + props.id;
     fetch(url)
       .then((response) => response.json())
       .then((response) => {
@@ -27,35 +27,41 @@ function Report(props) {
         setHeight(response[0].height);
         setWeight(response[0].weight);
         setDob(response[0].dob);
+        setAccount(response[0].account);
       })
       .catch((err) => console.log(err));
   }, []);
 
   const updateHash = async (hash) => {
     const url =
-      // "http://localhost:4000/updateHash/" + props.appointment + "/" + hash;
+      "http://localhost:4000/updateHash/" + props.appointment + "/" + hash;
 
-      fetch(url, {
-        method: "PUT", // or 'PUT'
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
+    fetch(url, {
+      method: "PUT", // or 'PUT'
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        console.log("Success");
       })
-        .then((response) => {
-          console.log("Success");
-        })
-        .catch((error) => console.error("Error:", error));
+      .catch((error) => console.error("Error:", error));
   };
 
-  const updateBlockchain = (account) => {};
+  const updateBlockchain = async (hash) => {
+    const account = await getAccount();
+    contract().then((res) => {
+      res.methods
+        .addReport(props.appointment, patientAccount, "0x".concat(hash))
+        .send({ from: account })
+        .on("transactionHash", function (hash) {
+          console.log(hash);
+        });
+    });
+  };
 
   const generateReport = async () => {
-    const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
-    const account = accounts[0];
-
     const input = document.getElementById("report");
     await html2canvas(input).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
@@ -68,9 +74,9 @@ function Report(props) {
         .upload(imgData)
         .then((hash) => {
           console.log("Uploaded file. Address:", hash);
+          updateBlockchain(hash);
           updateHash(hash);
         })
-        .then(() => updateBlockchain(account))
         .then(() => props.updateAppointments())
         .then(() => props.hideReportModal());
     });

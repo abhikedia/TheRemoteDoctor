@@ -79,7 +79,7 @@ app.get("/checkPatientRegistration/:email/:password", function (req, res) {
 });
 
 app.get("/getPatientData/:id", function (req, res) {
-  const query = `Select name, dob, height, weight from Patients where patientid = '${req.params.id}'`;
+  const query = `Select name, dob, height, weight, account from Patients where patientid = '${req.params.id}'`;
   connection.query(query, function (err, results) {
     err ? res.send(err) : res.json(results);
   });
