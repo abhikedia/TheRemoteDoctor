@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   networks: {
     development: {
@@ -11,7 +13,7 @@ module.exports = {
       version: "0.6.0",
     },
   },
-
+  contracts_build_directory: path.join(__dirname, './src/contracts'),
   db: {
     enabled: false,
   },

@@ -7,6 +7,7 @@ import { fetchAppointments, fetchScheduledAppointments } from "./apiCalls";
 import "./index.scss";
 import { connect } from "react-redux";
 import Report from "../Report/index";
+import { loadWeb3 } from "../utils/web3";
 import Records from "../Records/index";
 
 function Doctor(props) {
@@ -14,7 +15,7 @@ function Doctor(props) {
   const [scheduled, setScheduled] = useState([]);
 
   useEffect(async () => {
-    console.log("I was called");
+    loadWeb3();
 
     let appointments = [];
     let scheduled = [];
