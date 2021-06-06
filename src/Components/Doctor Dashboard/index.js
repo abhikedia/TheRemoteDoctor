@@ -18,6 +18,7 @@ function Doctor(props) {
   const [prevAppointmentNumber, setNumber] = useState(0);
   const [imageModal, setImageModal] = useState(false);
   const [image, setImage] = useState([]);
+  const [permissionMessage, setPermissionMessage] = useState("");
 
   useEffect(async () => {
     loadWeb3();
@@ -77,6 +78,14 @@ function Doctor(props) {
         .getHash(prevAppointmentNumber)
         .call({ from: account });
 
+      console.log(hash);
+      if (
+        hash ===
+        "0x4e554c4c00000000000000000000000000000000000000000000000000000000"
+      ) {
+        setPermissionMessage("Your Permission was Revoked!");
+        return;
+      }
       swarm.download(hash.slice(2)).then((array) => {
         setImage(swarm.toString(array));
         setImageModal(true);
@@ -127,6 +136,7 @@ function Doctor(props) {
                 </Button>
               </span>
             </div>
+            <div className="permission-message">{permissionMessage}</div>
           </div>
         </div>
       </div>

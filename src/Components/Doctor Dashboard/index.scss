@@ -94,6 +94,13 @@
           display: flex;
           gap: 2vw;
         }
+
+        .permission-message {
+          color: red;
+          position: relative;
+          left: 3vw;
+          top: 7vh;
+        }
       }
     }
   }

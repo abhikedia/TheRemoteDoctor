@@ -139,14 +139,35 @@
 }
 
 #history {
+  display: flex;
+  flex-direction: column;
   background-color: whitesmoke;
-  width: 40%;
-  height: 30%;
+  width: 55%;
+  height: 50%;
 
   .history-text {
     font-size: 2rem;
     padding: 0.5em;
     font-family: "Architects Daughter", cursive;
     font-weight: bolder;
+    margin-bottom: 3vh;
+  }
+
+  .history-data {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+  }
+}
+
+#report-display {
+  display: flex;
+  flex-direction: row;
+  gap: 6vw;
+  margin-left: 4vw;
+
+  .report-position {
+    position: relative;
+    bottom: 0.8vh;
   }
 }

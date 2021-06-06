@@ -25,5 +25,13 @@ contract theremotedoctor {
             return true;
         return false;
     }
+    
+    function getPatientHash(uint _an) public view returns(bytes32) {
+        return appointment_number[_an].report_hash;
+    }
+    
+    function revokePermission(uint _an) public {
+        appointment_number[_an].permission = false;
+    }
 }
     

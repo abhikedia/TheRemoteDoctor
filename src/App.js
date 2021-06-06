@@ -10,6 +10,7 @@ import TrackAppointment from "./Components/TrackAppointment/index";
 import { Route, Switch } from "react-router-dom";
 import Report from './Components/Report/index'
 import store from "./store";
+import History from './Components/Patient Dashboard/reportDisplay';
 import { Provider } from "react-redux";
 
 export default function App() {
@@ -25,7 +26,7 @@ export default function App() {
           <Route path="/graph" component={Graph} />
           <Route path="/doctorDashboard" component={doctorDashboard} />
           <Route path="/trackappointment" component={TrackAppointment} />
-          <Route path="/report" component={Report} />
+          <Route path="/report" component={History} />
         </Switch>
       </Provider>
     </main>

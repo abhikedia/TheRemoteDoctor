@@ -192,7 +192,7 @@ app.get("/getAppointmentsToday/", function (req, res) {
 });
 
 app.get("/getPatientReports/:patientid", function (req, res) {
-  const query = `Select Appointments.date, Appointments.visited, Doctors.name
+  const query = `Select Appointments.appointment_number, Appointments.date, Appointments.visited, Doctors.name
                   from Appointments
                   INNER JOIN Doctors ON
                   Appointments.doctor_id = Doctors.doctorid 

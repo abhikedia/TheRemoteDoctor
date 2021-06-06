@@ -12,12 +12,17 @@ import HistoryIcon from "@material-ui/icons/History";
 import Records from "../Records/index";
 import TrackAppointment from "../TrackAppointment/index";
 import History from "./history";
+import { loadWeb3 } from "../utils/web3";
 import "./index.scss";
 
 function Dashboard(props) {
   const [newAppointment, setNewAppointment] = useState(false);
   const [trackAppointment, setTrackAppointment] = useState(false);
   const [history, showHistory] = useState(false);
+
+  useEffect(() => {
+    loadWeb3();
+  }, []);
 
   function newAppointmentModal() {
     return (
