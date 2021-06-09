@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Header from "../Header/index";
-import Background from "../../assets/images/main_background.jpg";
 
 import "./index.scss";
 
@@ -12,19 +11,11 @@ export default function Homepage() {
   }, []);
 
   return (
-    <div className="homepage">
+    <div id="homepage">
       <Header />
-      <div className="main-body">
-        <img src={Background} alt="Health Related img." />
-      </div>
-      <div className="footer">
-        <div className="footer-text">
-          Everything has moved online, why not Hospitals and Healthcare?
-        </div>
-        <div className="footer-buttons">
-          <span>On-Boarding Manual</span>
-          <span>Hospital Login</span>
-        </div>
+      <div className="heading">The Remote Doctor</div>
+      <div className="text">
+        A blockchain enabled Appointment Booking platform.
       </div>
     </div>
   );

@@ -1,28 +1,16 @@
 .appbar {
-    display: flex;
-    flex-direction: row;
-    background-color: black;
+  display: flex;
 }
 
 .options {
-    display: flex;
-    flex-grow: 1;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 2vw;
-    margin: 1.5vw;
+  display: flex;
+  gap: 1.5vw;
+  margin: 2vw;
 }
 
 .header-options {
-    //important to over-write css applied by material-ui
-    color: whitesmoke !important;
-    font-weight: bold !important;
-    font-size: large !important;
-}
-
-.header {
-    font-weight: 900;
-    font-size: xx-large;
-    color: whitesmoke;
-    margin: 1.5vw;
+  color: #3c403d !important;
+  font-size: 1.5rem !important;
+  font-weight: 900 !important;
+  font-family: "Architects Daughter", cursive !important;
 }

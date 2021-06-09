@@ -94,171 +94,181 @@ export default function SignUp() {
   };
 
   return (
-    <div>
-      <div className="signup-main">
-        <div className="signup-col">
-          <div className="signup-col-1">
-            <Avatar
-              alt="Display Picture"
-              variant="square"
-              src={avatar}
-              className="signup-avatar"
-            />
-            <input
-              className="signup-input"
-              type="file"
-              id="img"
-              name="img"
-              accept="image/*"
-              onChange={(event) => {
-                setAvatar(URL.createObjectURL(event.target.files[0]));
-              }}
-            />
-          </div>
-          <div className="signup-col-2">
-            <div className="signup-form">
-              <div>
-                <TextField
-                  label="Name"
-                  color="secondary"
-                  required={true}
-                  autoFocus={true}
-                  fullWidth={true}
-                  variant="outlined"
-                  onChange={(event) => {
-                    setName(event.target.value);
-                  }}
-                />
-              </div>
-              <div>
-                <TextField
-                  label="Date of Birth"
-                  color="secondary"
-                  required={true}
-                  fullWidth={true}
-                  variant="outlined"
-                  onChange={(event) => {
-                    setDOB(event.target.value);
-                  }}
-                  // type='Date'
-                />
-              </div>
-              <div>
-                <InputLabel required>Gender</InputLabel>
-                <Select
-                  label="Gender"
-                  fullWidth={true}
-                  color="secondary"
-                  variant="outlined"
-                  placeholder="Gender"
-                  onChange={(event) => {
-                    setGender(event.target.value);
-                  }}
-                >
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Trans">Trans</option>
-                </Select>
-              </div>
-              <div>
-                <TextField
-                  label="Phone Number"
-                  color="secondary"
-                  required={true}
-                  fullWidth={true}
-                  variant="outlined"
-                  onChange={(event) => {
-                    setPhone(event.target.value);
-                  }}
-                />
-              </div>
-              <div>
-                <TextField
-                  label="Height (in cms)"
-                  color="secondary"
-                  type="Number"
-                  fullWidth={true}
-                  variant="outlined"
-                  onChange={(event) => {
-                    setHeight(event.target.value);
-                  }}
-                />
-              </div>
-              <div>
-                <TextField
-                  label="Weight (in kgs)"
-                  color="secondary"
-                  type="Number"
-                  fullWidth={true}
-                  variant="outlined"
-                  onChange={(event) => {
-                    setWeight(event.target.value);
-                  }}
-                />
-              </div>
-              <div>
-                <TextField
-                  label="Blood Group"
-                  color="secondary"
-                  fullWidth={true}
-                  variant="outlined"
-                  onChange={(event) => {
-                    setBlood(event.target.value);
-                  }}
-                />
-              </div>
-              <div>
-                <TextField
-                  label="Email"
-                  color="secondary"
-                  required={true}
-                  fullWidth={true}
-                  variant="outlined"
-                  onChange={(event) => {
-                    setEmail(event.target.value);
-                  }}
-                />
-              </div>
-              <div>
-                <TextField
-                  label="Password"
-                  color="secondary"
-                  type="password"
-                  required={true}
-                  fullWidth={true}
-                  variant="outlined"
-                  onChange={(event) => {
-                    setPassword(event.target.value);
-                  }}
-                />
-              </div>
-              <div>
-                <TextField
-                  label="Confirm Password"
-                  color="secondary"
-                  type="password"
-                  required={true}
-                  fullWidth={true}
-                  variant="outlined"
-                  onChange={(event) => {
-                    setConfirmPassword(event.target.value);
-                  }}
-                />
-              </div>
-              <div className="signup-error">{errorMessage}</div>
+    <div className="signup-main">
+      <div className="signup-header">
+        <Header />
+      </div>
+      <div className="signup-col">
+        <div className="signup-col-1">
+          <Avatar
+            alt="Display Picture"
+            variant="square"
+            src={avatar}
+            className="signup-avatar"
+          />
+          <input
+            className="signup-input"
+            type="file"
+            id="img"
+            name="img"
+            accept="image/*"
+            onChange={(event) => {
+              setAvatar(URL.createObjectURL(event.target.files[0]));
+            }}
+          />
+        </div>
+        <div className="signup-col-2">
+          <div className="signup-form">
+            <div>
+              <TextField
+                label="Name"
+                color="secondary"
+                required={true}
+                autoFocus={true}
+                fullWidth={true}
+                variant="outlined"
+                onChange={(event) => {
+                  setName(event.target.value);
+                }}
+              />
             </div>
+            <div>
+              <TextField
+                label="Date of Birth"
+                color="secondary"
+                required={true}
+                fullWidth={true}
+                variant="outlined"
+                onChange={(event) => {
+                  setDOB(event.target.value);
+                }}
+                // type='Date'
+              />
+            </div>
+            <div>
+              <InputLabel required>Gender</InputLabel>
+              <Select
+                label="Gender"
+                fullWidth={true}
+                color="secondary"
+                variant="outlined"
+                placeholder="Gender"
+                onChange={(event) => {
+                  setGender(event.target.value);
+                }}
+              >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Trans">Trans</option>
+              </Select>
+            </div>
+            <div>
+              <TextField
+                label="Phone Number"
+                color="secondary"
+                required={true}
+                fullWidth={true}
+                variant="outlined"
+                onChange={(event) => {
+                  setPhone(event.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <TextField
+                label="Height (in cms)"
+                color="secondary"
+                type="Number"
+                fullWidth={true}
+                variant="outlined"
+                onChange={(event) => {
+                  setHeight(event.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <TextField
+                label="Weight (in kgs)"
+                color="secondary"
+                type="Number"
+                fullWidth={true}
+                variant="outlined"
+                onChange={(event) => {
+                  setWeight(event.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <TextField
+                label="Blood Group"
+                color="secondary"
+                fullWidth={true}
+                variant="outlined"
+                onChange={(event) => {
+                  setBlood(event.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <TextField
+                label="Email"
+                color="secondary"
+                required={true}
+                fullWidth={true}
+                variant="outlined"
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <TextField
+                label="Password"
+                color="secondary"
+                type="password"
+                required={true}
+                fullWidth={true}
+                variant="outlined"
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <TextField
+                label="Confirm Password"
+                color="secondary"
+                type="password"
+                required={true}
+                fullWidth={true}
+                variant="outlined"
+                onChange={(event) => {
+                  setConfirmPassword(event.target.value);
+                }}
+              />
+            </div>
+            <div className="signup-error">{errorMessage}</div>
           </div>
         </div>
-        <div className="signup-button">
-          <Button
-            color="secondary"
-            variant="contained"
-            size="large"
-            onClick={() => signUpButton()}
-          >
-            Signup
-          </Button>
+        <div>
+          <div className="hospitals-text">
+            Everything is moving online. Why not hospitals?
+          </div>
+          <img
+            className="signup-col-3"
+            src="https://media.giphy.com/media/M9ZMQFPANNm0b9uBhc/giphy.gifhttps://media.giphy.com/media/M9ZMQFPANNm0b9uBhc/giphy.gif"
+          />
         </div>
+      </div>
+      <div className="signup-button">
+        <Button
+          color="secondary"
+          variant="contained"
+          size="large"
+          onClick={() => signUpButton()}
+        >
+          Signup
+        </Button>
       </div>
     </div>
   );
