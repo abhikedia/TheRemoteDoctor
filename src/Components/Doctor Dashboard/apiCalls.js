@@ -1,5 +1,5 @@
 export const fetchAppointments = async (id) => {
-  const url = "http://localhost:4000/fetchAppointments/" + 6;
+  const url = "http://localhost:4000/fetchAppointments/" + id;
 
   const res = fetch(url)
     .then((response) => response.json())
@@ -28,7 +28,7 @@ export const updatePatientTime = (time, id) => {
 };
 
 export const fetchScheduledAppointments = (id) => {
-  const url = "http://localhost:4000/fetchScheduledAppointments/" + 6;
+  const url = "http://localhost:4000/fetchScheduledAppointments/" + id;
 
   const res = fetch(url)
     .then((response) => response.json())

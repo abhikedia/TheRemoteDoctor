@@ -106,6 +106,13 @@ app.get("/getHospitals/:state/:city", function (req, res) {
   });
 });
 
+app.get("/getAppointmentByNumber/:an/:patientid", function (req, res) {
+  const query = `Select date,time from Appointments where appointment_number = '${req.params.an}' and patient_id = '${req.params.patientid}'`;
+  connection.query(query, function (err, results) {
+    err ? res.send(err) : res.json(results);
+  });
+});
+
 app.get("/getDoctors/:city/:dept/:hospital", function (req, res) {
   let query;
   if (req.params.hospital !== "none")

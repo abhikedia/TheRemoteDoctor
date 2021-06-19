@@ -8,7 +8,7 @@ CREATE TABLE `Patients` (
 	`gender` varchar(1) NOT NULL,
 	`password` varchar(255) NOT NULL,
 	`phone` varchar(255) NOT NULL,
-	`avatar` varchar(255) NOT NULL,
+	`avatar` varchar(255),
 	`dob` DATE NOT NULL,
 	`height` INT,
 	`weight` INT,

@@ -58,6 +58,7 @@ function Appointment(props) {
     };
     console.log("data", data);
     createAppointment(JSON.stringify(data));
+    props.parentCallBack();
   };
 
   const LeftCol = () => {

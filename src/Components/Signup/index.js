@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../Header/index";
 import { Button, Avatar, Select, InputLabel } from "@material-ui/core";
 import Background from "../../assets/images/avatar.png";
+import imageToBase64 from "image-to-base64/browser";
 import TextField from "@material-ui/core/TextField";
 import "./index.scss";
 
@@ -15,10 +16,13 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [avatar, setAvatar] = useState(Background);
+  const [avatarHash, setAvatarHash] = useState("");
   const [count, setCount] = useState(0);
   const [height, setHeight] = useState("NA");
   const [weight, setWeight] = useState("NA");
   const [blood, setBlood] = useState("NA");
+
+  const swarm = require("swarm-js").at("http://swarm-gateways.net");
 
   useEffect(() => {
     (async () => {
@@ -70,7 +74,7 @@ export default function SignUp() {
           gender: gender.charAt(0),
           password: password,
           phone: phone,
-          avatar: avatar,
+          avatar: avatarHash,
           dob: dob,
           height: height,
           weight: weight,
@@ -112,8 +116,22 @@ export default function SignUp() {
             id="img"
             name="img"
             accept="image/*"
-            onChange={(event) => {
-              setAvatar(URL.createObjectURL(event.target.files[0]));
+            onChange={async (event) => {
+              imageToBase64(URL.createObjectURL(event.target.files[0])) // Path to the image
+                .then((response) => {
+                  swarm
+                    .upload(response)
+                    .then((hash) => {
+                      console.log("Uploaded Avatar. Address:", hash);
+                      setAvatarHash(hash);
+                    })
+                    .then(() =>
+                      setAvatar(URL.createObjectURL(event.target.files[0]))
+                    );
+                })
+                .catch((error) => {
+                  console.log(error); // Logs an error if there was one
+                });
             }}
           />
         </div>
@@ -134,7 +152,7 @@ export default function SignUp() {
             </div>
             <div>
               <TextField
-                label="Date of Birth"
+                label="Date of Birth (YYYY-MM-DD)"
                 color="secondary"
                 required={true}
                 fullWidth={true}

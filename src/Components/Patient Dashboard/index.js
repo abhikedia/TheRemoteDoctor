@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Button } from "@material-ui/core";
+import { Avatar, Button, useScrollTrigger } from "@material-ui/core";
 import ApartmentIcon from "@material-ui/icons/Apartment";
 import AllInclusiveIcon from "@material-ui/icons/AllInclusive";
 import Grid from "@material-ui/core/Grid";
@@ -13,16 +13,59 @@ import Records from "../Records/index";
 import TrackAppointment from "../TrackAppointment/index";
 import History from "./history";
 import { loadWeb3 } from "../utils/web3";
+import getAge from "../utils/ageCalculator";
 import "./index.scss";
 
 function Dashboard(props) {
   const [newAppointment, setNewAppointment] = useState(false);
   const [trackAppointment, setTrackAppointment] = useState(false);
   const [history, showHistory] = useState(false);
+  const [age, setAge] = useState("");
+  const [avatarImage, setAvatar] = useState("");
+
+  const swarm = require("swarm-js").at("http://swarm-gateways.net");
 
   useEffect(() => {
     loadWeb3();
+    setAge(getAge(props.dob));
+    // try {
+    //   swarm
+    //     .download(props.avatar)
+    //     .then((array) => {
+    //       setAvatar(base64toBlob(swarm.toString(array)));
+    //     })
+    //     .catch((err) => {
+    //       throw err;
+    //     });
+    // } catch (err) {
+    //   console.log("Couldn't download data from swarm");
+    // }
   }, []);
+
+  const handleCallBack = () => {
+    setNewAppointment(false);
+  };
+
+  function base64toBlob(base64Data, contentType) {
+    contentType = contentType || "";
+    var sliceSize = 1024;
+    var byteCharacters = atob(base64Data);
+    var bytesLength = byteCharacters.length;
+    var slicesCount = Math.ceil(bytesLength / sliceSize);
+    var byteArrays = new Array(slicesCount);
+
+    for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+      var begin = sliceIndex * sliceSize;
+      var end = Math.min(begin + sliceSize, bytesLength);
+
+      var bytes = new Array(end - begin);
+      for (var offset = begin, i = 0; offset < end; ++i, ++offset) {
+        bytes[i] = byteCharacters[offset].charCodeAt(0);
+      }
+      byteArrays[sliceIndex] = new Uint8Array(bytes);
+    }
+    return new Blob(byteArrays, { type: contentType });
+  }
 
   function newAppointmentModal() {
     return (
@@ -31,7 +74,7 @@ function Dashboard(props) {
         open={newAppointment}
         onClose={() => setNewAppointment(false)}
       >
-        <Appointment />
+        <Appointment parentCallBack={handleCallBack} />
       </Modal>
     );
   }
@@ -146,13 +189,13 @@ function Dashboard(props) {
         <div className="dashboard-user">
           <div id="dashboard-user-profile">
             <div className="dashboard-avatar">
-              <Avatar src={props.avatar} />
+              <Avatar src={avatarImage} />
             </div>
             <div className="dashboard-name">{props.name}</div>
             <div className="profile-data">
               <div>
                 <span className="data-head">Age: </span>
-                <span className="data-ans">{}</span>
+                <span className="data-ans">{age}</span>
               </div>
               <div>
                 <span className="data-head">Height: </span>

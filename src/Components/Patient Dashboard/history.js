@@ -5,7 +5,7 @@ export default function History(props) {
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    const url = "http://localhost:4000/getPatientReports/" + 5;
+    const url = "http://localhost:4000/getPatientReports/" + props.patientid;
 
     fetch(url)
       .then((response) => response.json())

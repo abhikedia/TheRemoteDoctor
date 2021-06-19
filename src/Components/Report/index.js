@@ -8,6 +8,7 @@ import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import { updateAppointments } from "../../state/Updates/action";
 import { contract, getAccount } from "../utils/web3";
+import getAge from '../utils/ageCalculator';
 
 const swarm = require("swarm-js").at("https://swarm-gateways.net");
 
@@ -90,7 +91,7 @@ function Report(props) {
           <span className="date">Date: {getDate()}</span>
         </div>
         <div>
-          <span>Age:</span>
+          <span>Age: {getAge(dob)} years</span>
           <span className="details">
             <span>Height: {height} cms</span>
             <span className="weight">Weight: {weight} kg</span>

@@ -44,6 +44,7 @@ export default function ReportDisplay(props) {
   return (
     <div>
       <div id="report-display">
+        <div>AN: {props.data.appointment_number}</div>
         <div>{props.data.name}</div>
         <div>{props.data.date.slice(0, 10)}</div>
         <div className="report-position">
